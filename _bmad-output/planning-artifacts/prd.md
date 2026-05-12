@@ -1,6 +1,10 @@
 ---
-stepsCompleted: ["step-01-init", "step-02-discovery", "step-02b-vision", "step-02c-executive-summary", "step-03-success", "step-04-journeys", "step-05-domain", "step-06-innovation", "step-07-project-type", "step-08-scoping", "step-09-functional", "step-10-nonfunctional", "step-11-polish", "step-12-complete"]
+stepsCompleted: ["step-01-init", "step-02-discovery", "step-02b-vision", "step-02c-executive-summary", "step-03-success", "step-04-journeys", "step-05-domain", "step-06-innovation", "step-07-project-type", "step-08-scoping", "step-09-functional", "step-10-nonfunctional", "step-11-polish", "step-12-complete", "step-e-01-discovery", "step-e-02-review", "step-e-03-edit"]
 completedAt: "2026-05-12"
+lastEdited: "2026-05-12"
+editHistory:
+  - date: "2026-05-12"
+    changes: "修复 3 个 NFR 交叉引用错误（NFR1→FR32, NFR3→FR20, NFR4→FR33）；拆分复合 FR15 为 FR15a-d 和 FR27 为 FR27a-b；增强 FR12 和 FR37 可度量性；修复 FR34、FR47、NFR14 实现泄漏；修复 NFR16 交叉引用（FR24→FR28）"
 releaseMode: "phased"
 classification:
   projectType: "methodology-framework"
@@ -614,13 +618,16 @@ cd sand-framework
 - **FR9:** FDE+ 可以通过引导式对话创建符合 7 字段标准的意图声明（purpose、desired_outcome、acceptance_criteria、constraints、context_references、meta、intent_type）
 - **FR10:** 系统可以对意图声明自动运行 CLEAR 质量检查（Complete/Lean/Executable/Assessable/Reversible），标记未通过项并提示修正
 - **FR11:** FDE+ 可以从已验证的意图声明自动生成执行契约（must_pass/should_pass/must_not_violate 三级结构）
-- **FR12:** 系统可以在执行过程中基于意图声明和执行契约主动识别未覆盖的边界条件，并请求人类澄清
+- **FR12:** 系统可以在执行过程中基于意图声明和执行契约主动识别未覆盖的边界条件（至少覆盖以下类别：空输入/缺失输入、并发冲突、授权边界、数据一致性、回滚窗口），并请求人类澄清
 - **FR13:** FDE+ 可以查看意图的生命周期状态（Draft → Reviewed → Approved → In Execution → Validated → Archived）
 - **FR14:** 系统可以按意图类型分类管理（Feature/Fix/Refactor/Exploration/Optimization）
 
 ### 执行运行时
 
-- **FR15:** 系统可以根据已验证的意图声明和编排方案，启动执行会话（`sand-run`），依次调用所选 Agent 拓扑中的 Skill（内部或外部），将每个 Skill 的输出链接到下一个 Skill 的输入，并实时记录执行状态到 `.sand/executions/`
+- **FR15a:** 系统可以根据已验证的意图声明和编排方案，启动执行会话（`sand-run`）
+- **FR15b:** 系统可以在执行会话中按所选 Agent 拓扑依次调用 Skill（内部或外部）
+- **FR15c:** 系统可以将执行会话中每个 Skill 的输出链接为下一个 Skill 的输入
+- **FR15d:** 系统可以将执行会话的实时状态记录到 `.sand/executions/`
 
 ### 编排与插件生态
 
@@ -641,7 +648,8 @@ cd sand-framework
 
 ### 意图偏差追踪
 
-- **FR27:** 系统在验证结果与意图声明出现偏差时（包括但不限于：验收条件未完全满足、安全合规警告、架构约束冲突），自动记录偏差事件到 `.sand/executions/{session_id}/deviations.json`，包含偏差类型、严重程度、关联的验收条款、以及建议的修正动作。FDE+ 可在复盘时查看偏差清单并将其标记为"已解决/接受风险/打回重建"
+- **FR27a:** 系统在验证结果与意图声明出现偏差时（包括但不限于：验收条件未完全满足、安全合规警告、架构约束冲突），自动记录偏差事件到 `.sand/executions/{session_id}/deviations.json`，包含偏差类型、严重程度、关联的验收条款、以及建议的修正动作
+- **FR27b:** FDE+ 可在复盘时查看偏差清单，并将每条偏差标记为"已解决/接受风险/打回重建"
 
 ### 治理与审计
 
@@ -657,10 +665,10 @@ cd sand-framework
 
 ### 度量与洞察
 
-- **FR34:** 系统可以通过内嵌脚本从 Git/PR/CI 自动采集 5 个轻量信号（PR 周期时间、事故标签、AI 参与度、变更失败率、部署频率）
+- **FR34:** 系统可以从 Git/PR/CI 自动采集 5 个轻量信号（PR 周期时间、事故标签、AI 参与度、变更失败率、部署频率）
 - **FR35:** 技术负责人可以查看度量输出（`.sand/metrics/` JSON 文件），用于雷达图校准和改进路径 ROI 计算
 - **FR36:** 系统可以接受手动提供的 CSV 作为度量数据 fallback（当 CI API 不可访问时）
-- **FR37:** 变革催化师可以生成数据驱动的"认知失调报告"（展示好消息 vs 坏消息的对比）
+- **FR37:** 变革催化师可以生成数据驱动的"认知失调报告"，报告须包含：正向指标（积极趋势）、负向指标（恶化趋势）、变化趋势分析（方向 + 幅度）、以及推荐的下一步行动
 
 ### 学习与资产化
 
@@ -676,17 +684,17 @@ cd sand-framework
 - **FR44:** 系统可以在运行时对 YAML 工件执行必填字段轻量校验（基于 JSON Schema）
 - **FR45:** 每个 Skill 可以通过 `skill.yaml` 中的 `host_requirements` 字段声明所需宿主能力，在不支持的宿主上给出明确错误提示
 - **FR46:** 系统可以通过 `.sand/` 标准目录结构（intents/、audits/、metrics/、plugins/、assessments/、retrospectives/、executions/）管理所有工件状态
-- **FR47:** 系统可以通过 glob 模式自动发现并链接 `.sand/` 子目录中的 Skill 工件（Phase 3 实现；Phase 2 采用约定路径手动传递）
+- **FR47:** 系统可以自动发现并链接 `.sand/` 子目录中的 Skill 工件（Phase 3 实现；Phase 2 采用约定路径手动传递）
 - **FR48:** 3 个 Agent 角色（问题域负责人、FDE+、变革催化师）可以通过菜单分发机制引导用户选择合适的工作流入口
 
 ## Non-Functional Requirements
 
 ### 安全与隐私
 
-- **NFR1:** 所有通过 SAND Skill 发送给 AI 模型的上下文数据必须经过 FR44 定义的最小化处理——默认不发送完整代码文件，仅发送接口契约和用户显式标记的片段
+- **NFR1:** 所有通过 SAND Skill 发送给 AI 模型的上下文数据必须经过 FR32 定义的最小化处理——默认不发送完整代码文件，仅发送接口契约和用户显式标记的片段
 - **NFR2:** 审计日志（`.sand/audits/`）中的每条记录必须包含 `inputHash` 和 `outputHash`，确保事后可验证数据完整性（不可篡改）
-- **NFR3:** 外部 Skill 插件在执行前必须通过基础验证（FR17），未验证的 Skill 不可被编排层调用
-- **NFR4:** 用户配置的脱敏规则（FR45）必须在数据离开本地环境前同步应用，不存在"先发送后脱敏"的时间窗口
+- **NFR3:** 外部 Skill 插件在执行前必须通过基础验证（FR20），未验证的 Skill 不可被编排层调用
+- **NFR4:** 用户配置的脱敏规则（FR33）必须在数据离开本地环境前同步应用，不存在"先发送后脱敏"的时间窗口
 - **NFR5:** `.sand/` 目录中的所有工件文件遵循最小权限原则——默认不含可执行代码，仅为声明式数据文件（YAML/JSON/CSV）
 
 ### 兼容性与可移植性
@@ -705,9 +713,9 @@ cd sand-framework
 
 ### 可靠性
 
-- **NFR14:** Skill 工作流中断（用户中断、宿主崩溃、网络断开）后可从最后完成的步骤恢复——通过 frontmatter `stepsCompleted` 数组实现断点续传
+- **NFR14:** Skill 工作流中断（用户中断、宿主崩溃、网络断开）后可从最后完成的步骤恢复，支持断点续传
 - **NFR15:** 任何 Skill 执行失败不得损坏已有的 `.sand/` 工件——失败时工件保持上一个一致状态（写入操作应为原子性或使用临时文件 + 重命名）
-- **NFR16:** 审计事件记录（FR24）必须在 Skill 执行成功和失败两种情况下都写入——失败的执行同样需要审计追踪
+- **NFR16:** 审计事件记录（FR28）必须在 Skill 执行成功和失败两种情况下都写入——失败的执行同样需要审计追踪
 
 ### 性能
 
