@@ -31,10 +31,13 @@ date: '2026-05-12'
 - **Charles L. Wang et al. (2025)**. "MI9: An Integrated Runtime Governance Framework for Agentic AI." [arXiv:2508.03858](https://arxiv.org/abs/2508.03858) —— 涉及 Agentic AI 治理和图基元素（delegation graph），但不涉及"operational consensus"或"typed property graph as world model"
 - **arXiv:2510.19692** "Toward Agentic Software Engineering Beyond Code" — Wang 等人讨论了 agentic programming 的社会技术关切，但未提出 consensus 概念
 
-**风险评估**：此引用可能源自原始 LLM 辅助概念设计时的"幻觉引用"。建议采取以下措施之一：
-1. **替换**：用可验证的 MI9 (Wang 2025) 或其他治理框架论文替代
-2. **重新定位**：将"可治理可审计原则"的理论来源改为 Mikkonen 的"人类审查不可削减" + ISO 42001 + NIST AI RMF 的组合
-3. **降级**：从"五大理论基石"降为"设计参考"，保留概念但不作为核心理论引用
+**风险评估**：此引用可能源自原始 LLM 辅助概念设计时的"幻觉引用"。
+
+**✅ 决策（2026-05-12）：选择方案 2——重新定位**
+- 将"可治理可审计原则"的理论来源改为四源综合：Mikkonen "人类审查不可削减" + ISO/IEC 42001 + Wang MI9 运行时治理 + NIST AI RMF 1.1
+- `agentic-consensus.md` 已更新为"Agentic AI 治理理论"，包含透明的定位说明
+- `design-principles.md` 和 `README.md` 已同步更新
+- 五大理论基石的框架保留，但第五理论从单一不可验证引用转为四个可验证来源的综合
 
 ---
 
