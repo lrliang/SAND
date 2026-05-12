@@ -1,0 +1,48 @@
+# SAND 意图声明模板
+# 详细规格说明见 ../04-artifacts/intent-statement-spec.md
+
+intent_id: "SAND-YYYY-NNNN"
+intent_type: feature  # feature | fix | refactor | exploration | optimization
+
+# ── 第一组：人类决策域（Why + What）──
+
+purpose: |
+  为什么要做这件事？它解决什么业务问题或用户痛点？
+  必须关联到一个可追溯的投资假设或业务目标。
+
+desired_outcome: |
+  成功之后，世界应该变成什么样子？
+  用可观测的状态变化描述，而非实现细节。
+
+# ── 第二组：契约域（How to verify）──
+
+acceptance_criteria:
+  - criterion: ""
+    verification: "automated_test"  # automated_test | human_review | hybrid | performance_benchmark
+    priority: must  # must | should
+
+# ── 第三组：约束域（What NOT to do）──
+
+constraints:
+  technical: []
+  security: []
+  scope: []
+
+# ── 第四组：上下文域（Related knowledge）──
+
+context_references:
+  architecture: ""
+  domain_model: ""
+  prior_decisions: ""
+  related_intents: []
+  known_risks: ""
+
+# ── 第五组：元数据域 ──
+
+meta:
+  owner: ""
+  priority: medium  # low | medium | high | critical
+  investment_hypothesis: ""
+  estimated_ai_leverage: ""
+  created: ""
+  status: draft  # draft | reviewed | approved | in_execution | validated | archived

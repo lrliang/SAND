@@ -1,0 +1,48 @@
+# SAND CLEAR 检查清单模板
+# 详细规格说明见 ../02-development-cycle/intent/clear-checklist.md
+
+intent_ref: "SAND-YYYY-NNNN"
+checked_by: ""
+checked_date: ""
+
+checklist:
+  - dimension: "C - Complete（完整）"
+    auto_checkable: true
+    checks:
+      - "7个必填字段是否全部填写？"
+      - "上下文引用是否有效（文件存在、链接可访问）？"
+    status: pending             # pending | pass | fail
+    notes: ""
+
+  - dimension: "L - Lean（精简）"
+    auto_checkable: false
+    checks:
+      - "是否存在超出范围的内容？"
+      - "scope 约束是否清晰划定了'不做什么'？"
+    status: pending
+    notes: ""
+
+  - dimension: "E - Executable（可执行）"
+    auto_checkable: true
+    checks:
+      - "AI拿到此意图声明+引用上下文后，能否开始工作而无需再问人类？"
+    status: pending
+    notes: ""
+
+  - dimension: "A - Assessable（可评估）"
+    auto_checkable: true
+    checks:
+      - "每条验收标准是否有明确的验证方式？"
+      - "是否存在'看起来主观'的标准？"
+    status: pending
+    notes: ""
+
+  - dimension: "R - Reversible（可回退）"
+    auto_checkable: false
+    checks:
+      - "如果实现结果不理想，能否安全回退到执行前状态？"
+      - "回退策略是否定义？"
+    status: pending
+    notes: ""
+
+overall_result: pending         # pending | pass | fail

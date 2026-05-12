@@ -1,0 +1,53 @@
+# SAND 成熟度评估问卷模板
+# 详细规格说明见 ../02-development-cycle/assess/maturity-framework.md
+
+assessment_id: ""
+assessment_date: ""
+assessment_mode: initial        # initial（首次诊断）| calibration（循环校准）
+assessor: ""
+
+dimensions:
+  - id: DIM-01
+    name: "AI工具采纳度"
+    current_level: 1            # 1-5
+    evidence: ""
+    notes: ""
+
+  - id: DIM-02
+    name: "意图驱动成熟度"
+    current_level: 1
+    evidence: ""
+    notes: ""
+
+  - id: DIM-03
+    name: "编排能力"
+    current_level: 1
+    evidence: ""
+    notes: ""
+
+  - id: DIM-04
+    name: "人类审查体系"
+    current_level: 1
+    evidence: ""
+    notes: ""
+
+  - id: DIM-05
+    name: "学习与资产化"
+    current_level: 1
+    evidence: ""
+    notes: ""
+
+  - id: DIM-06
+    name: "治理与合规"
+    current_level: 1
+    evidence: ""
+    notes: ""
+
+  - id: DIM-07
+    name: "组织文化"
+    current_level: 1
+    evidence: ""
+    notes: ""
+
+overall_profile: ""             # 均衡型 | 偏科型 | 尖刺型
+recommended_transformation_path: ""

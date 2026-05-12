@@ -1,0 +1,13 @@
+# SAND Agent 能力卡模板
+# 详细规格说明见 ../05-tools/agent-capability-card.md
+
+agent_id: ""
+capability_domain: ""
+model_requirement: ""           # 如 "Sonnet 级别以上"
+context_window_need: medium     # low | medium | high
+input_format: ""
+output_format: ""
+human_oversight: required       # required | recommended | optional
+known_limitations: []
+cost_profile: ""                # 如 "低（单次调用 ~$0.05）"
+reliability: ""                 # 如 "高（幻觉率 <5%）"

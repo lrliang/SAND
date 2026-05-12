@@ -1,0 +1,33 @@
+# SAND 综合交付包模板
+# 详细规格说明见 ../04-artifacts/delivery-package-spec.md
+
+package_id: "DP-SAND-YYYY-NNNN-PP"
+intent_ref: "SAND-YYYY-NNNN"
+pulse_number: 1
+
+artifacts:
+  code:
+    files_changed: []
+    diff_summary: ""
+
+  tests:
+    unit_tests: []
+    integration_tests: []
+    test_coverage_delta: ""
+
+  documentation:
+    updated_docs: []
+    adr: ""
+
+  security_scan:
+    tool: ""
+    findings: ""
+
+  contract_verification:
+    must_pass: { total: 0, passed: 0, failed: 0 }
+    should_pass: { total: 0, passed: 0, note: "" }
+    must_not_violate: { total: 0, violated: 0 }
+
+ai_confidence: 0.0
+ai_notes: ""
+recommended_hip: "HIP-2"

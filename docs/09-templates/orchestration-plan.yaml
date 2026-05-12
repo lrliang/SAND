@@ -1,0 +1,41 @@
+# SAND 编排方案模板
+# 详细规格说明见 ../04-artifacts/orchestration-plan-spec.md
+
+plan_id: "OP-SAND-YYYY-NNNN"
+parent_intent: "SAND-YYYY-NNNN"
+
+# O1: 上下文策略
+context_strategy:
+  project_context: []     # 始终加载的项目级上下文文件
+  domain_context: []      # 按需加载的领域知识
+  intent_context: []      # 本次意图自带的局部上下文
+  context_quality_check:
+    completeness: ""      # AI执行所需信息是否全部包含
+    accuracy: ""          # 是否与当前代码/架构一致
+    conciseness: ""       # 是否剔除了无关噪音
+
+# O2: Agent 选型
+agent_selection:
+  - agent_id: ""
+    role_in_workflow: ""
+    capability_card_ref: ""
+
+# O3: 拓扑设计
+topology:
+  pattern: solo  # solo | pipeline | swarm | hierarchy
+  rationale: ""
+  agent_connections: []
+
+# O4: 人类介入点
+human_intervention_points:
+  - point_id: "HIP-01"
+    location: ""          # 在工作流中的位置
+    level: "HIP-2"        # HIP-1 | HIP-2 | HIP-3
+    reviewer: ""
+    criteria: ""
+
+# O5: 失败模式预案
+failure_mode_plan:
+  - failure_mode: ""      # hallucination | context_loss | bias_amplification | capability_overflow | cascade_failure
+    detection_method: ""
+    mitigation_strategy: ""

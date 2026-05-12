@@ -1,0 +1,25 @@
+# SAND 执行契约模板
+# 详细规格说明见 ../04-artifacts/execution-contract-spec.md
+
+contract_id: "EC-SAND-YYYY-NNNN"
+parent_intent: "SAND-YYYY-NNNN"
+
+# 必须通过（Must Pass）：全部不满足则判定为失败
+must_pass:
+  - id: "MP-01"
+    description: ""
+    test_type: automated_test  # automated_test | human_review | hybrid | automated_security_scan | performance_benchmark | contract_test | dependency_diff_check
+    test_path: ""
+
+# 应当通过（Should Pass）：尽量满足，不满足需记录原因
+should_pass:
+  - id: "SP-01"
+    description: ""
+    test_type: ""
+    baseline: ""
+
+# 不得违反（Must Not Violate）：反向约束
+must_not_violate:
+  - id: "MNV-01"
+    description: ""
+    test_type: ""

@@ -1,0 +1,14 @@
+# SAND 意图偏差记录模板
+# 详细规格说明见 ../04-artifacts/deviation-event-spec.md
+
+id: "DEV-YYYY-NNNN-PP"
+intent_ref: "SAND-YYYY-NNNN"
+pulse_ref: 1
+deviation_type: ""              # intent_misalignment | contract_failure | security_violation | architecture_drift
+
+description: ""
+root_cause_hypothesis: ""
+severity: medium                # low | medium | high | critical
+resolution: ""
+
+learning_signal: ""             # 候选纳入资产库的改进点

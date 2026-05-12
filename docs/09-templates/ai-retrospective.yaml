@@ -1,0 +1,36 @@
+# SAND AI 复盘议程模板
+# 详细规格说明见 ../02-development-cycle/learn/ai-retrospective.md
+
+retro_id: ""
+cycle_ref: ""
+date: ""
+facilitator: ""                 # 通常是变革催化师
+participants: []
+
+# 5 议题标准议程
+agenda:
+  - topic: "意图质量回顾"
+    focus: "本轮意图声明的CLEAR评分分布、回退原因分析"
+    findings: ""
+    action: ""
+
+  - topic: "编排效果回顾"
+    focus: "Agent拓扑选择合理性、上下文策略充分性、HIP有效性"
+    findings: ""
+    action: ""
+
+  - topic: "AI杠杆率分析"
+    focus: "本轮杠杆率、瓶颈识别（AI能力/上下文/人类审查）"
+    findings: ""
+    action: ""
+
+  - topic: "失败模式复盘"
+    focus: "新失败模式、缓解策略有效性"
+    findings: ""
+    action: ""
+
+  - topic: "资产化提名"
+    focus: "值得资产化的经验、归入哪类资产"
+    asset_nominations: []
+
+# 核心理念：复盘对象不是人的表现，而是人-AI协作系统的表现
