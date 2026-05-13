@@ -67,6 +67,7 @@
     },
     "meta": {
       "type": "object",
+      "required": ["status"],
       "properties": {
         "author": { "type": "string" },
         "created_at": { "type": "string", "format": "date-time" },

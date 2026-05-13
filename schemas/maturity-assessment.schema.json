@@ -62,14 +62,15 @@
       "description": "All 7 maturity dimensions with assessed levels."
     },
     "organizational_shape": {
-      "type": "string",
-      "enum": ["balanced", "skewed", "spiked"],
-      "description": "Detected organizational shape from radar chart analysis."
+      "type": ["string", "null"],
+      "enum": ["balanced", "skewed", "spiked", null],
+      "description": "Detected organizational shape from radar chart analysis. Null before analysis is complete."
     },
     "improvement_pathways": {
       "type": "array",
       "items": {
         "type": "object",
+        "required": ["target_dimension", "recommended_skill"],
         "properties": {
           "target_dimension": { "type": "string" },
           "current_level": { "type": "integer" },

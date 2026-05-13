@@ -1,0 +1,19 @@
+# .sand/.gitignore
+# Copy this file to your project's .sand/.gitignore
+# Customize which runtime artifacts to track in version control.
+
+# Always exclude
+*.tmp
+cache/
+
+# Recommended to commit (audit trail)
+# audits/
+
+# Optional to commit (user choice)
+# intents/
+# assessments/
+# retrospectives/
+
+# Usually exclude (ephemeral)
+executions/
+metrics/

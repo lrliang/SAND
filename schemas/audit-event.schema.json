@@ -67,7 +67,7 @@
     },
     "step": {
       "type": "string",
-      "pattern": "^step-\\d{2}-.+$",
+      "pattern": "^step-\\d{2,}-.+$",
       "description": "Step identifier (format: step-{NN}-{name})."
     },
     "actor": {

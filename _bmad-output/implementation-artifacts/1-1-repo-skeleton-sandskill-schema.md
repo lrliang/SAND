@@ -1,6 +1,6 @@
 # Story 1.1: 框架仓库骨架 + sandskill.v1 契约 Schema
 
-Status: review
+Status: done
 
 ## Story
 
@@ -50,6 +50,21 @@ so that 所有后续 Skill 开发有一致的基础设施和约束。
   - [x] 6.3 创建 `templates/maturity-assessment.yaml`
   - [x] 6.4 创建 `templates/orchestration-plan.yaml`
   - [x] 6.5 创建 `templates/sand-config.yaml`
+
+### Review Findings
+
+- [x] [Review][Decision] **Schema 文件命名与 Architecture 不一致** — 决定：保留长名（更具描述性），后续更新 Architecture 文档
+- [x] [Review][Decision] **audit-event.schema.json 中 input_hash/output_hash 是否应为必填** — 决定：保持可选（中断/失败场景合理），SandRuntime 确保成功时填写
+- [x] [Review][Decision] **缺失 `.sand/.gitignore` 模板** — 已修复：创建 templates/dot-sand-gitignore
+- [x] [Review][Patch] **maturity-assessment organizational_shape null 冲突** — 已修复：schema 改为 type: ["string", "null"]，enum 添加 null
+- [x] [Review][Patch] **improvement_pathways 数组项缺少 required** — 已修复：添加 required: ["target_dimension", "recommended_skill"]
+- [x] [Review][Patch] **audit-event step pattern 两位数限制** — 已修复：\\d{2} → \\d{2,}
+- [x] [Review][Patch] **.sand-version 缺少换行符** — 已修复
+- [x] [Review][Patch] **intent-statement meta 内部缺 required** — 已修复：添加 required: ["status"]
+- [x] [Review][Defer] **嵌套对象缺少 additionalProperties: false** — constraints、clear_check、meta、skill_chain items 等嵌套对象未设 additionalProperties: false，与顶层不一致 — deferred, 一致性改进
+- [x] [Review][Defer] **CLAUDE.md 和 CURSOR_RULES.md 内容重复** — 两文件高度重复，未来维护成本高，建议抽取公共 SKILLS.md — deferred, 架构改进
+- [x] [Review][Defer] **host 枚举硬编码限制扩展性** — 新增宿主支持需修改 schema，考虑改为 pattern 或 oneOf — deferred, Phase 3 扩展时处理
+- [x] [Review][Defer] **entry_point 和 customize_schema 缺少路径格式约束** — 仅 type: string 无 pattern — deferred, 低优先级
 
 ## Dev Notes
 
