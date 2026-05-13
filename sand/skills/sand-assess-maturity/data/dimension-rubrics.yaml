@@ -1,0 +1,403 @@
+# SAND 7 维度成熟度评估量表
+# 来源：docs/02-development-cycle/assess/maturity-framework.md
+# 用途：sand-assess-maturity Skill 的 step-02-dialogue 引用此文件引导结构化对话
+
+dimensions:
+  - id: D1
+    name: "AI 工具采纳度"
+    definition: "组织在开发全生命周期中引入和标准化 AI 工具的广度和深度"
+    sdc_phase: "全阶段（基础设施层）"
+    theory_basis: "AI 原生谱系（行业共识 + Hassan SE 3.0）"
+    levels:
+      L1:
+        name: "初始/无意识"
+        indicators:
+          - "个别工程师自发使用 AI 编码助手"
+          - "无组织层面的 AI 工具策略"
+        evidence:
+          - type: "工具安装数、个人许可证"
+            collection: "手动：问卷"
+          - type: "策略文档缺失"
+            collection: "手动：文档检查"
+      L2:
+        name: "可重复/有意识"
+        indicators:
+          - "团队层面统一了 AI 编码工具（如 Cursor/Claude Code）"
+          - "有基础的使用指南（如禁止在 AI 对话中输入敏感数据）"
+        evidence:
+          - type: "许可证分配记录"
+            collection: "自动：许可证管理系统"
+          - type: "指南文档"
+            collection: "手动：文档检查"
+      L3:
+        name: "已定义/系统化"
+        indicators:
+          - "AI 工具覆盖开发全生命周期（编码、测试、审查、文档）"
+          - "工具选型有标准化流程（评估 → 试用 → 推广）"
+        evidence:
+          - type: "工具矩阵文档"
+            collection: "手动：工具审计"
+          - type: "选型记录"
+            collection: "手动：流程审计"
+      L4:
+        name: "量化管理/优化"
+        indicators:
+          - "AI 工具使用有量化度量（AI 参与度、接受率、拒绝率）"
+          - "基于度量数据持续优化工具配置和提示词策略"
+        evidence:
+          - type: "度量仪表盘"
+            collection: "自动：IDE 遥测"
+          - type: "优化记录"
+            collection: "混合"
+      L5:
+        name: "持续演进/自适应"
+        indicators:
+          - "组织主动评估和引入新兴 AI 工具（如从 Copilot → Cursor → 自研）"
+          - "AI 工具选型影响组织架构决策（如选择支持特定 Agent 协议的平台）"
+        evidence:
+          - type: "工具演进路线图"
+            collection: "手动：策略审查"
+          - type: "架构决策记录"
+            collection: "手动：ADR 审查"
+
+  - id: D2
+    name: "意图驱动成熟度"
+    definition: "组织将开发需求从自由格式的自然语言转化为结构化意图声明的程度和质量"
+    sdc_phase: "Intent"
+    theory_basis: "Hassan SE 3.0"
+    levels:
+      L1:
+        name: "初始/无意识"
+        indicators:
+          - "开发者直接在 AI 工具中输入自由格式提示词"
+          - "无标准化的需求-到-实现传递格式"
+        evidence:
+          - type: "对话历史（抽样）"
+            collection: "手动：抽样审查"
+          - type: "需求文档格式"
+            collection: "手动：文档检查"
+      L2:
+        name: "可重复/有意识"
+        indicators:
+          - "团队有'好的提示词'模板或最佳实践清单"
+          - "关键功能开发前有简短的需求描述（但非结构化意图声明）"
+        evidence:
+          - type: "模板文档"
+            collection: "手动：文档检查"
+          - type: "需求描述文档"
+            collection: "手动：抽样审查"
+      L3:
+        name: "已定义/系统化"
+        indicators:
+          - "使用结构化意图声明（含 purpose、desired_outcome、acceptance_criteria 等字段）"
+          - "意图声明有质量检查流程（如 CLEAR 检查）"
+        evidence:
+          - type: "意图声明文件"
+            collection: "自动：文件存在性检查"
+          - type: "检查记录"
+            collection: "自动：CLEAR 通过率"
+      L4:
+        name: "量化管理/优化"
+        indicators:
+          - "意图首通率（Intent First-Pass Rate）≥60%"
+          - "意图声明自动生成执行契约（must_pass/should_pass/must_not_violate）"
+        evidence:
+          - type: "度量数据"
+            collection: "自动：状态机追踪"
+          - type: "契约文件"
+            collection: "自动：文件存在性"
+      L5:
+        name: "持续演进/自适应"
+        indicators:
+          - "AI 主动识别意图声明中未覆盖的边界条件并请求澄清"
+          - "意图模式库不断积累并被复用（从历史意图中学习）"
+        evidence:
+          - type: "边界条件澄清记录"
+            collection: "自动：对话日志分析"
+          - type: "资产库记录"
+            collection: "自动：复用率追踪"
+
+  - id: D3
+    name: "编排能力"
+    definition: "组织设计和执行多 Agent 协作方案的结构化程度"
+    sdc_phase: "Orchestrate"
+    theory_basis: "多 Agent 编排理论"
+    levels:
+      L1:
+        name: "初始/无意识"
+        indicators:
+          - "开发者在单个 AI 会话中完成所有工作（无编排概念）"
+          - "无 Agent 角色区分"
+        evidence:
+          - type: "工作方式观察"
+            collection: "手动：访谈"
+          - type: "使用模式"
+            collection: "手动：访谈"
+      L2:
+        name: "可重复/有意识"
+        indicators:
+          - "团队意识到不同任务适合不同的 AI 交互模式"
+          - "偶尔使用多轮对话来分解复杂任务"
+        evidence:
+          - type: "使用指南"
+            collection: "手动：文档检查"
+          - type: "对话历史"
+            collection: "手动：抽样审查"
+      L3:
+        name: "已定义/系统化"
+        indicators:
+          - "使用标准化编排拓扑（Solo/Pipeline/Swarm/Hierarchy）"
+          - "有 Agent 角色定义（如问题域负责人、FDE+、变革催化师）"
+        evidence:
+          - type: "编排方案文件"
+            collection: "自动：文件检查"
+          - type: "角色配置"
+            collection: "手动：配置审查"
+      L4:
+        name: "量化管理/优化"
+        indicators:
+          - "编排方案基于意图特征自动推荐拓扑类型"
+          - "外部 Skill 通过插件机制接入编排层"
+        evidence:
+          - type: "推荐记录"
+            collection: "自动：编排日志"
+          - type: "插件注册记录"
+            collection: "自动：registry 检查"
+      L5:
+        name: "持续演进/自适应"
+        indicators:
+          - "编排方案根据执行反馈动态调整（如自动降级拓扑）"
+          - "跨项目的编排模式被抽象为可复用的'编排配方'"
+        evidence:
+          - type: "调整记录"
+            collection: "自动：执行日志"
+          - type: "资产库记录"
+            collection: "自动：复用率"
+
+  - id: D4
+    name: "人类审查体系"
+    definition: "组织在 AI 参与的开发流程中建立的结构化人类审查和质量控制机制的完善程度"
+    sdc_phase: "Validate + Build"
+    theory_basis: "Fowler 约束工程"
+    levels:
+      L1:
+        name: "初始/无意识"
+        indicators:
+          - "AI 生成的代码直接合并，无专门审查流程"
+          - "代码审查不区分人工编写和 AI 生成的代码"
+        evidence:
+          - type: "PR 审查记录"
+            collection: "自动：Git PR 数据"
+          - type: "审查策略文档"
+            collection: "手动：文档检查"
+      L2:
+        name: "可重复/有意识"
+        indicators:
+          - "AI 生成代码有标识（如 commit message 标注）"
+          - "关键模块的 AI 生成代码需额外人工审查"
+        evidence:
+          - type: "Git 提交历史"
+            collection: "自动：commit 分析"
+          - type: "审查策略"
+            collection: "手动：流程检查"
+      L3:
+        name: "已定义/系统化"
+        indicators:
+          - "三层审查策略：第一层自动化 lint/test → 第二层 AI 辅助审查 → 第三层人工深度审查"
+          - "HIP 级别已配置（HIP-1/2/3 根据任务风险区分）"
+        evidence:
+          - type: "审查配置"
+            collection: "混合"
+          - type: "HIP 配置"
+            collection: "手动：配置检查"
+      L4:
+        name: "量化管理/优化"
+        indicators:
+          - "三通道并行验证（契约/安全/架构）全面运行"
+          - "审查效率有度量（PR 审查中位时间、变更失败率）且持续优化"
+        evidence:
+          - type: "验证报告"
+            collection: "自动：验证日志"
+          - type: "度量仪表盘"
+            collection: "自动：Git/CI 数据"
+      L5:
+        name: "持续演进/自适应"
+        indicators:
+          - "约束工程体系完善（计算控制 + 推断控制双层）"
+          - "审查策略根据历史数据自动调整（如高风险模块自动升级 HIP 级别）"
+        evidence:
+          - type: "约束配置"
+            collection: "混合"
+          - type: "调整记录"
+            collection: "自动"
+
+  - id: D5
+    name: "学习与资产化"
+    definition: "组织从 AI 协作经验中提取、结构化和复用知识资产的系统性程度"
+    sdc_phase: "Learn"
+    theory_basis: "Fowler 认知债务"
+    levels:
+      L1:
+        name: "初始/无意识"
+        indicators:
+          - "无复盘机制，AI 协作经验留在个人记忆中"
+          - "团队重复遇到相同的 AI 协作问题"
+        evidence:
+          - type: "复盘记录缺失"
+            collection: "手动：流程检查"
+          - type: "问题追踪记录"
+            collection: "手动：访谈"
+      L2:
+        name: "可重复/有意识"
+        indicators:
+          - "偶尔做 AI 相关的回顾/复盘"
+          - "有团队内部的'AI 使用心得'分享"
+        evidence:
+          - type: "复盘记录"
+            collection: "手动：记录检查"
+          - type: "分享记录"
+            collection: "手动：记录检查"
+      L3:
+        name: "已定义/系统化"
+        indicators:
+          - "5 议题标准化 AI 复盘流程定期运行"
+          - "AI 资产分类体系建立（上下文资产、意图模式、编排配方、验证规则、失败案例）"
+        evidence:
+          - type: "复盘结构化输出"
+            collection: "自动：文件检查"
+          - type: "资产库"
+            collection: "自动：资产库检查"
+      L4:
+        name: "量化管理/优化"
+        indicators:
+          - "资产复用率可追踪（从历史资产中获益的 SDC 循环占比）"
+          - "飞轮加速指标有改善趋势（资产复用率↑、意图首通率↑、循环周期↓）"
+        evidence:
+          - type: "复用率度量"
+            collection: "自动：资产引用追踪"
+          - type: "趋势图"
+            collection: "自动：度量仪表盘"
+      L5:
+        name: "持续演进/自适应"
+        indicators:
+          - "资产库成为组织记忆的核心——新成员通过资产库而非口耳相传上手"
+          - "跨团队资产共享和交叉授粉"
+        evidence:
+          - type: "入职流程"
+            collection: "手动：流程审查"
+          - type: "共享记录"
+            collection: "混合"
+
+  - id: D6
+    name: "治理与合规"
+    definition: "组织对 AI 参与的开发决策进行结构化审计和合规管理的完善程度"
+    sdc_phase: "Governance"
+    theory_basis: "ISO 42001 + NIST AI RMF"
+    levels:
+      L1:
+        name: "初始/无意识"
+        indicators:
+          - "无 AI 决策审计机制"
+          - "无法回答'AI 为什么做了这个决策'"
+        evidence:
+          - type: "审计记录缺失"
+            collection: "手动：流程检查"
+          - type: "决策追溯能力"
+            collection: "手动：模拟审计"
+      L2:
+        name: "可重复/有意识"
+        indicators:
+          - "AI 使用有基础记录（如哪些代码是 AI 生成的）"
+          - "有 AI 使用政策文档（允许/禁止的使用场景）"
+        evidence:
+          - type: "Git 标注记录"
+            collection: "自动：commit 分析"
+          - type: "政策文档"
+            collection: "手动：文档检查"
+      L3:
+        name: "已定义/系统化"
+        indicators:
+          - "审计事件自动记录（intentId、skillVersion、actor、timestamp）"
+          - "每个人工确认点有时间戳和确认记录"
+        evidence:
+          - type: ".sand/audits/"
+            collection: "自动：审计日志检查"
+          - type: "确认记录"
+            collection: "自动：审计日志"
+      L4:
+        name: "量化管理/优化"
+        indicators:
+          - "意图→Skill→决策的完整证据链可追溯"
+          - "审计报告可导出为标准格式（JSON/CSV）供外部审计师审查"
+        evidence:
+          - type: "审计追踪报告"
+            collection: "自动：证据链分析"
+          - type: "导出报告"
+            collection: "自动：导出功能"
+      L5:
+        name: "持续演进/自适应"
+        indicators:
+          - "与行业合规标准的映射已建立（ISO 42001 / EU AI Act / SOC2）"
+          - "持续合规基础设施——每次 SDC 循环自动积累审计证据"
+        evidence:
+          - type: "合规映射文档"
+            collection: "手动：合规审查"
+          - type: "自动化程度"
+            collection: "自动"
+
+  - id: D7
+    name: "组织文化"
+    definition: "AI 协作理念在组织各层级的内化程度和变革推进的有效性"
+    sdc_phase: "全阶段（组织层）"
+    theory_basis: "渐进采纳理论"
+    levels:
+      L1:
+        name: "初始/无意识"
+        indicators:
+          - "AI 使用是个人选择，组织无态度"
+          - "部分团队成员对'又一个框架/工具'有抵触情绪"
+        evidence:
+          - type: "组织沟通记录"
+            collection: "手动：访谈"
+          - type: "团队反馈"
+            collection: "手动：匿名调查"
+      L2:
+        name: "可重复/有意识"
+        indicators:
+          - "组织明确鼓励 AI 使用，提供工具和预算"
+          - "有 AI 相关的培训或分享活动"
+        evidence:
+          - type: "预算记录、公告"
+            collection: "手动：记录检查"
+          - type: "培训记录"
+            collection: "手动：记录检查"
+      L3:
+        name: "已定义/系统化"
+        indicators:
+          - "有明确的变革催化师角色或工程效能团队推动 AI 采纳"
+          - "采用'最小切口'策略：从单个痛点 → 单个 Skill → 单个团队 → 验证效果"
+        evidence:
+          - type: "角色分配"
+            collection: "手动：组织图检查"
+          - type: "实验记录"
+            collection: "手动：记录检查"
+      L4:
+        name: "量化管理/优化"
+        indicators:
+          - "多团队自然扩散——后续团队主动请求采纳而非被推动"
+          - "数据驱动的认知失调报告推动变革（正向+负向指标对比）"
+        evidence:
+          - type: "采纳记录"
+            collection: "手动：记录检查"
+          - type: "度量报告"
+            collection: "混合"
+      L5:
+        name: "持续演进/自适应"
+        indicators:
+          - "AI 协作理念内化为组织文化——不需要专门推动"
+          - "组织为 AI 协作设计了新的角色和职责（如 FDE+、Mission Pod）"
+        evidence:
+          - type: "文化评估"
+            collection: "手动：文化调查"
+          - type: "组织架构"
+            collection: "手动：组织图检查"

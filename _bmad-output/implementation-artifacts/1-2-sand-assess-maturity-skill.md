@@ -1,6 +1,6 @@
 # Story 1.2: 实现 sand-assess-maturity Skill
 
-Status: ready-for-dev
+Status: done
 
 ## Story
 
@@ -22,35 +22,47 @@ so that 我可以向 CTO 展示具体的 AI 转型行动方案和预期 ROI。
 
 ## Tasks / Subtasks
 
-- [ ] Task 1: 创建 SKILL.md 入口文件 (AC: #1)
-  - [ ] 1.1 编写 sandskill.v1 frontmatter（全部 9 个必填字段 + 相关可选字段）
-  - [ ] 1.2 编写 Skill 激活入口内容（概述 + 步骤导航）
-- [ ] Task 2: 创建 customize.toml (AC: #9)
-  - [ ] 2.1 编写标准 workflow 配置块（activation_steps_prepend/append、persistent_facts、on_complete）
-- [ ] Task 3: 创建 data/dimension-rubrics.yaml (AC: #3)
-  - [ ] 3.1 从 maturity-framework.md 提取 7 维度定义，转化为 YAML 结构
-  - [ ] 3.2 为每个维度-等级组合填写行为指标、证据类型、采集方式
-  - [ ] 3.3 交叉验证维度名称和等级描述与 maturity-framework.md 一致
-- [ ] Task 4: 创建 data/pathway-rules.yaml (AC: #4)
-  - [ ] 4.1 从 gap-analysis.md 提取组织形状识别规则
-  - [ ] 4.2 编写维度→Skill→ROI 映射表
-  - [ ] 4.3 编写维度间依赖关系
-  - [ ] 4.4 编写路径排序策略（形状驱动 → 最快见效 → 依赖关系）
-- [ ] Task 5: 创建 step-01-scope.md (AC: #5)
-  - [ ] 5.1 编写评估范围选择引导（团队级/组织级）
-  - [ ] 5.2 编写基本信息收集（team_id、规模、AI 工具使用时长）
-- [ ] Task 6: 创建 step-02-dialogue.md (AC: #6)
-  - [ ] 6.1 编写 7 维度结构化对话引导流程
-  - [ ] 6.2 引用 dimension-rubrics.yaml 中的行为指标作为对话锚点
-- [ ] Task 7: 创建 step-03-data-collect.md (AC: 补充)
-  - [ ] 7.1 编写 Git/CI 数据采集引导（辅助评估，非必须）
-- [ ] Task 8: 创建 step-04-radar.md (AC: #7)
-  - [ ] 8.1 编写等级汇总和雷达图 JSON 生成逻辑
-  - [ ] 8.2 编写颜色编码（红/黄/绿）标注
-  - [ ] 8.3 编写输出持久化到 .sand/assessments/ 的指令
-- [ ] Task 9: 创建 step-05-pathways.md (AC: #8)
-  - [ ] 9.1 编写改进路径生成逻辑（引用 pathway-rules.yaml）
-  - [ ] 9.2 编写路径展示格式（Skill + ROI + 时间范围）
+- [x] Task 1: 创建 SKILL.md 入口文件 (AC: #1)
+  - [x] 1.1 编写 sandskill.v1 frontmatter（全部 9 个必填字段 + 相关可选字段）
+  - [x] 1.2 编写 Skill 激活入口内容（概述 + 步骤导航）
+- [x] Task 2: 创建 customize.toml (AC: #9)
+  - [x] 2.1 编写标准 workflow 配置块（activation_steps_prepend/append、persistent_facts、on_complete）
+- [x] Task 3: 创建 data/dimension-rubrics.yaml (AC: #3)
+  - [x] 3.1 从 maturity-framework.md 提取 7 维度定义，转化为 YAML 结构
+  - [x] 3.2 为每个维度-等级组合填写行为指标、证据类型、采集方式
+  - [x] 3.3 交叉验证维度名称和等级描述与 maturity-framework.md 一致
+- [x] Task 4: 创建 data/pathway-rules.yaml (AC: #4)
+  - [x] 4.1 从 gap-analysis.md 提取组织形状识别规则
+  - [x] 4.2 编写维度→Skill→ROI 映射表
+  - [x] 4.3 编写维度间依赖关系
+  - [x] 4.4 编写路径排序策略（形状驱动 → 最快见效 → 依赖关系）
+- [x] Task 5: 创建 step-01-scope.md (AC: #5)
+  - [x] 5.1 编写评估范围选择引导（团队级/组织级）
+  - [x] 5.2 编写基本信息收集（team_id、规模、AI 工具使用时长）
+- [x] Task 6: 创建 step-02-dialogue.md (AC: #6)
+  - [x] 6.1 编写 7 维度结构化对话引导流程
+  - [x] 6.2 引用 dimension-rubrics.yaml 中的行为指标作为对话锚点
+- [x] Task 7: 创建 step-03-data-collect.md (AC: 补充)
+  - [x] 7.1 编写 Git/CI 数据采集引导（辅助评估，非必须）
+- [x] Task 8: 创建 step-04-radar.md (AC: #7)
+  - [x] 8.1 编写等级汇总和雷达图 JSON 生成逻辑
+  - [x] 8.2 编写颜色编码（红/黄/绿）标注
+  - [x] 8.3 编写输出持久化到 .sand/assessments/ 的指令
+- [x] Task 9: 创建 step-05-pathways.md (AC: #8)
+  - [x] 9.1 编写改进路径生成逻辑（引用 pathway-rules.yaml）
+  - [x] 9.2 编写路径展示格式（Skill + ROI + 时间范围）
+
+### Review Findings
+
+- [x] [Review][Decision] **gap-analysis.md 正文 D4 依赖矛盾** — 已修复：从 gap-analysis.md 正文中移除 D4，保持 D4 可独立启动
+- [x] [Review][Patch] **step-04 流程层描述语义错误** — 已修复：改为更清晰的双向说明
+- [x] [Review][Patch] **outputs 路径格式不一致** — 已修复：step-04 明确 timestamp=YYYYMMDD 格式
+- [x] [Review][Patch] **step-05 跳转引用错误** — 已修复：改为"第 7 步"
+- [x] [Review][Patch] **尖刺型规则缺失下界** — 已修复：改为 `1 <= count(levels>=4) <= 2`
+- [x] [Review][Defer] **step 文件内 `./data/` 路径锚点歧义** — Architecture Pattern 4 规定路径相对于 Skill 目录，但从 steps/ 子目录内解析可能不一致 — deferred, LLM Agent 实际运行时验证
+- [x] [Review][Defer] **架构要求的 Skill 本地 templates/ 子目录缺失** — Architecture 目录结构列出 sand-assess-maturity/templates/，但实现使用全局 templates/ — deferred, 设计选择
+- [x] [Review][Defer] **D4 sdc_phase 跨阶段格式不统一** — "Validate + Build" vs 单 phase 英文名 vs 中文"全阶段" — deferred, 格式统一
+- [x] [Review][Defer] **pathway-rules.yaml 缺少 D1 条目** — dependencies 部分缺少 D1 的显式 requires: null 条目 — deferred, 完整性改进
 
 ## Dev Notes
 
@@ -303,8 +315,37 @@ sand/skills/sand-assess-maturity/
 
 ### Agent Model Used
 
+Claude Opus 4.6 (1M context)
+
 ### Debug Log References
+
+N/A — Markdown workflow Skill, no runtime debugging.
 
 ### Completion Notes List
 
+- **Task 1 (SKILL.md):** Created with sandskill.v1 frontmatter (9 required + 6 optional fields). Entry content includes overview, 5-step navigation, and data/template references. Frontmatter field order matches Architecture §1.
+- **Task 2 (customize.toml):** Standard workflow block with persistent_facts pointing to maturity-framework.md and gap-analysis.md — ensures these theory docs are loaded as context when the Skill runs.
+- **Task 3 (dimension-rubrics.yaml):** 7 dimensions × 5 levels = 35 entries. Each entry has 2 indicators + evidence types + collection methods, extracted verbatim from maturity-framework.md. Dimensions include definition, sdc_phase, and theory_basis metadata. Validated: all 7 D-ids present, each has exactly L1-L5.
+- **Task 4 (pathway-rules.yaml):** Complete extraction from gap-analysis.md including: color coding rules, 3 organizational shapes with identification rules and strategies, dimension→Skill→ROI mapping for all 7 dimensions, dependency graph (D2→D1, D3→D2, D6→D4), and 3-tier priority sorting algorithm.
+- **Task 5 (step-01-scope.md):** Assessment scope selection (team/department/organization), basic info collection (team_id, size, AI tool duration, primary tools), .sand/ directory initialization. Uses menu-based interaction ([A]/[B]/[C]).
+- **Task 6 (step-02-dialogue.md):** Core assessment engine. Per-dimension dialogue template with level-by-level checking (L1→L5), evidence collection, and immediate feedback. Includes dialogue style guidance (probing questions, distinguishing wishes from reality, conservative rating defaults).
+- **Task 7 (step-03-data-collect.md):** Optional Git/CI data collection with skip option. Provides shell commands for PR cycle time, AI participation rate, change failure rate. Calibration table compares user data to industry baselines.
+- **Task 8 (step-04-radar.md):** ASCII radar chart visualization, color coding application, key ratio calculations (red %, max gap, process vs infrastructure), organizational shape identification. Persists to .sand/assessments/{date}_{team_id}.yaml using maturity-assessment template.
+- **Task 9 (step-05-pathways.md):** Improvement pathway generation: collects red dimensions, checks dependency prerequisites, sorts by 3-tier priority (shape→speed→dependencies), displays structured pathway cards (Skill + ROI + timeframe + action steps). Updates assessment report with pathways. Provides next-step recommendations.
+
+### Change Log
+
+- 2026-05-13: Story 1.2 implemented. Created SAND's first Skill (sand-assess-maturity) with 9 files: SKILL.md entry, customize.toml config, 2 data files (dimension-rubrics + pathway-rules), 5 step workflow files. Deleted .gitkeep placeholder.
+
 ### File List
+
+- sand/skills/sand-assess-maturity/SKILL.md (NEW)
+- sand/skills/sand-assess-maturity/customize.toml (NEW)
+- sand/skills/sand-assess-maturity/data/dimension-rubrics.yaml (NEW)
+- sand/skills/sand-assess-maturity/data/pathway-rules.yaml (NEW)
+- sand/skills/sand-assess-maturity/steps/step-01-scope.md (NEW)
+- sand/skills/sand-assess-maturity/steps/step-02-dialogue.md (NEW)
+- sand/skills/sand-assess-maturity/steps/step-03-data-collect.md (NEW)
+- sand/skills/sand-assess-maturity/steps/step-04-radar.md (NEW)
+- sand/skills/sand-assess-maturity/steps/step-05-pathways.md (NEW)
+- sand/skills/sand-assess-maturity/.gitkeep (DELETED)

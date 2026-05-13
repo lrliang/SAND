@@ -1,0 +1,129 @@
+# SAND 改进路径推荐规则
+# 来源：docs/02-development-cycle/assess/gap-analysis.md
+# 用途：sand-assess-maturity Skill 的 step-05-pathways 引用此文件生成改进路径
+
+# 颜色编码
+color_coding:
+  red:
+    range: "L1-L2"
+    meaning: "需要立即改进"
+    action: "生成改进路径"
+  yellow:
+    range: "L3"
+    meaning: "已标准化，可持续优化"
+    action: "列入优化建议"
+  green:
+    range: "L4-L5"
+    meaning: "优秀"
+    action: "维持和扩展"
+
+# 三种组织形状识别规则
+organizational_shapes:
+  balanced:
+    name: "均衡型"
+    rule: "max(levels) - min(levels) <= 2"
+    description: "7 个维度等级相对均匀，各方面同步推进"
+    strategy:
+      low: "均值 ≤ L2 时，选择 1 个红色维度作为突破口"
+      medium: "均值 L3 时，聚焦最容易提升到 L4 的维度"
+      high: "均值 ≥ L4 时，转向 L5 自适应能力建设"
+  skewed:
+    name: "偏科型"
+    rule: "max(levels) - min(levels) >= 3 且不满足尖刺型"
+    description: "部分维度显著高于其他维度，系统性短板制约整体效能"
+    strategy:
+      primary: "优先补齐最低的红色维度（短板限制高维度效能）"
+      secondary: "利用高维度作为信心基础"
+      avoid: "避免继续拔高已经高的维度"
+  spiked:
+    name: "尖刺型"
+    rule: "1 <= count(levels >= 4) <= 2 且 count(levels <= 2) >= 4"
+    description: "1-2 个极高维度，其余大部分在 L1-L2"
+    strategy:
+      primary: "保护和展示尖刺作为变革灯塔"
+      secondary: "从尖刺向相邻维度扩散"
+      avoid: "避免同时全面铺开"
+
+# 维度→Skill→ROI 映射表
+dimension_skill_mapping:
+  D1:
+    skill: null
+    note: "外部动作：工具选型和部署"
+    typical_pathway: "标准化团队 AI 工具配置"
+    timeframe: "1-2 周"
+    expected_roi: "开发者 AI 使用率从散发到 >80%"
+  D2:
+    skill: "sand-create-intent"
+    note: null
+    typical_pathway: "在 1-2 个项目中引入意图声明工作流"
+    timeframe: "2-3 周"
+    expected_roi: "意图首通率从 0% 到 ≥40%"
+  D3:
+    skill: "sand-design-orchestration"
+    note: null
+    typical_pathway: "为 3 个典型场景设计编排方案"
+    timeframe: "3-4 周"
+    expected_roi: "复杂任务完成时间减少"
+  D4:
+    skill: "sand-validate-delivery"
+    note: null
+    typical_pathway: "引入三通道并行验证到 PR 流程"
+    timeframe: "2 周"
+    expected_roi: "PR 审查中位时间 -40%，变更失败率 -30%"
+  D5:
+    skill: "sand-run-retrospective"
+    note: null
+    typical_pathway: "启动 AI 资产化循环"
+    timeframe: "6 周"
+    expected_roi: "资产复用率 0% → 20%"
+  D6:
+    skill: "sand-governance-audit"
+    note: null
+    typical_pathway: "建立审计事件记录机制"
+    timeframe: "4 周"
+    expected_roi: "可通过模拟审计检查"
+  D7:
+    skill: null
+    note: "组合多个 Skill"
+    typical_pathway: "最小切口策略：单痛点→单 Skill→单团队"
+    timeframe: "3-6 周"
+    expected_roi: "≥1 个团队主动请求扩展"
+
+# 维度间依赖关系
+dependencies:
+  D2:
+    requires: "D1 >= L2"
+    reason: "没有标准化的 AI 工具，无法谈意图驱动"
+  D3:
+    requires: "D2 >= L2"
+    reason: "没有结构化意图，编排方案没有输入"
+    transitive: "D1 >= L2 通过 D2 隐含满足"
+  D4:
+    requires: null
+    reason: "可独立启动"
+  D5:
+    requires: null
+    reason: "可以在任何阶段启动，不依赖其他维度"
+  D6:
+    requires: "D4 >= L2"
+    reason: "没有审查记录，审计证据链无法建立"
+  D7:
+    requires: null
+    reason: "涌现性——通常由其他维度的成功推动"
+
+# 路径生成算法
+pathway_generation:
+  step_1: "收集所有红色维度（L1 或 L2）"
+  step_2: "按优先级排序"
+  priorities:
+    - order: 1
+      name: "组织形状驱动"
+      rule: "偏科型优先补最低，尖刺型优先补尖刺相邻"
+    - order: 2
+      name: "最快见效优先"
+      rule: "有现成 Skill 可直接运行的维度排前面"
+    - order: 3
+      name: "依赖关系"
+      rule: "某些维度是其他维度的前提"
+  step_3: "为每条路径匹配 Skill 和预期效果"
+  constraint: "不推荐前提条件未满足的路径"

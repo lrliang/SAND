@@ -20,7 +20,7 @@ development_status:
   epic-1: in-progress
   1-0-assess-theory-foundation: done
   1-1-repo-skeleton-sandskill-schema: done
-  1-2-sand-assess-maturity-skill: ready-for-dev
+  1-2-sand-assess-maturity-skill: done
 
   # ── Epic 2: sand-create-intent（意图管理）──
   epic-2: backlog
