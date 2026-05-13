@@ -1,0 +1,17 @@
+# sand-create-intent 定制化配置
+# 3 层 merge 语义：base → team → user
+# 标量覆盖、表深合并、数组追加
+
+[workflow]
+
+activation_steps_prepend = []
+
+activation_steps_append = []
+
+persistent_facts = [
+  "file:{sand-root}/docs/02-development-cycle/intent/intent-statement.md",
+  "file:{sand-root}/docs/02-development-cycle/intent/clear-checklist.md",
+  "file:{sand-root}/docs/02-development-cycle/intent/execution-contract.md",
+]
+
+on_complete = ""

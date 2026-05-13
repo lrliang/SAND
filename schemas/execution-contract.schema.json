@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://sand-framework.dev/schemas/execution-contract.schema.json",
   "title": "SAND Execution Contract",
-  "description": "Three-tier execution contract generated from a validated intent statement.",
+  "description": "Three-tier execution contract auto-generated from a validated intent statement.",
   "type": "object",
   "required": [
     "contract_id",
@@ -14,7 +14,8 @@
   "properties": {
     "contract_id": {
       "type": "string",
-      "description": "Unique contract identifier."
+      "pattern": "^INT-\\d{8}-\\d{3,}-contract-v\\d+\\.\\d+$",
+      "description": "Unique contract identifier (format: {intent_id}-contract-v{major}.{minor})."
     },
     "intent_id": {
       "type": "string",
@@ -26,44 +27,51 @@
       "pattern": "^v\\d+\\.\\d+$",
       "description": "Contract version (e.g., 'v1.0')."
     },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the contract was generated."
+    },
     "must_pass": {
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["id", "description"],
+        "required": ["id", "criterion", "verification", "source"],
         "properties": {
-          "id": { "type": "string" },
-          "description": { "type": "string" },
-          "verification": { "type": "string" }
+          "id": { "type": "string", "pattern": "^MP-\\d{3,}$" },
+          "criterion": { "type": "string", "description": "Testable condition from acceptance_criteria[priority=must]." },
+          "verification": { "type": "string" },
+          "source": { "type": "string", "description": "Traceability: acceptance_criteria index or 'ai_derived'." }
         }
       },
-      "description": "Conditions that MUST pass for the delivery to be accepted."
+      "description": "Conditions that MUST ALL pass. Any failure → reject to Build."
     },
     "should_pass": {
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["id", "description"],
+        "required": ["id", "criterion", "verification", "source"],
         "properties": {
-          "id": { "type": "string" },
-          "description": { "type": "string" },
-          "verification": { "type": "string" }
+          "id": { "type": "string", "pattern": "^SP-\\d{3,}$" },
+          "criterion": { "type": "string", "description": "Testable condition from acceptance_criteria[priority=should]." },
+          "verification": { "type": "string" },
+          "source": { "type": "string", "description": "Traceability: acceptance_criteria index or 'ai_derived'." }
         }
       },
-      "description": "Conditions that SHOULD pass (conditional acceptance if failed with justification)."
+      "description": "Conditions that SHOULD pass. Partial failure → conditional acceptance with deviations."
     },
     "must_not_violate": {
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["id", "description"],
+        "required": ["id", "constraint", "source"],
         "properties": {
-          "id": { "type": "string" },
-          "description": { "type": "string" },
-          "verification": { "type": "string" }
+          "id": { "type": "string", "pattern": "^MNV-\\d{3,}$" },
+          "constraint": { "type": "string", "description": "Hard constraint from constraints.technical/security/scope." },
+          "source": { "type": "string", "description": "Traceability: constraints subdomain and index." }
         }
       },
-      "description": "Hard constraints that must NEVER be violated."
+      "description": "Hard constraints that must NEVER be violated. Any violation → redirect to Intent."
     },
     "clear_check": {
       "type": "object",
@@ -79,9 +87,9 @@
     "meta": {
       "type": "object",
       "properties": {
-        "generated_at": { "type": "string", "format": "date-time" },
-        "generated_from": { "type": "string" }
-      }
+        "generated_from": { "type": "string", "description": "Intent ID this contract was generated from." }
+      },
+      "description": "Contract generation metadata. Note: generated_at is a top-level field, not duplicated here."
     }
   },
   "additionalProperties": false

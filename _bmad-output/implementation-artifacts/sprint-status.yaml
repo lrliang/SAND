@@ -25,7 +25,7 @@ development_status:
   # ── Epic 2: sand-create-intent（意图管理）──
   epic-2: in-progress
   2-0-intent-theory-foundation: done
-  2-1-sand-create-intent-skill: backlog
+  2-1-sand-create-intent-skill: done
 
   # ── Epic 3: sand-validate-delivery（交付验证）──
   epic-3: backlog

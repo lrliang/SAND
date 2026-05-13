@@ -1,0 +1,123 @@
+# CLEAR 质量检查项定义
+# 来源: docs/02-development-cycle/intent/clear-checklist.md
+# 用途: sand-create-intent step-03-clear-check 的数据源
+# 维度: C(Complete) L(Lean) E(Executable) A(Assessable) R(Reversible)
+# 自动化级别: ai_auto = AI 可独立判定, needs_human = 需人工判断
+
+execution_order: [C, E, A, L, R]
+
+pass_thresholds:
+  pass: "所有维度 status 为 pass"
+  warn: "至少 1 个维度 status 为 warn，且无 fail"
+  fail: "至少 1 个维度 status 为 fail"
+
+dimensions:
+  C:
+    name: "Complete"
+    name_zh: "完整"
+    automation: ai_auto
+    items:
+      - id: C1
+        check: "7 字段全部非空"
+        pass_criteria: "所有字段均有实质内容（非占位符、非 TBD）"
+        fail_criteria: "任何字段为空、仅含占位符或 TODO"
+      - id: C2
+        check: "purpose 包含业务关联"
+        pass_criteria: "明确提及业务问题/用户痛点/投资假设"
+        fail_criteria: "仅有技术描述，无业务关联"
+      - id: C3
+        check: "desired_outcome 可观测"
+        pass_criteria: "描述可观测的状态变化（含量化指标或可判定条件）"
+        fail_criteria: "仅有模糊愿景（如'系统更好'）"
+      - id: C4
+        check: "acceptance_criteria >= 1 条 must"
+        pass_criteria: "至少 1 条 priority=must 的验收标准"
+        fail_criteria: "全部为 should 或无验收标准"
+      - id: C5
+        check: "constraints 非空"
+        pass_criteria: "至少 1 项技术/安全/范围约束"
+        fail_criteria: "全部子域为空（几乎不可能没有约束）"
+
+  L:
+    name: "Lean"
+    name_zh: "精简"
+    automation: needs_human
+    items:
+      - id: L1
+        check: "单一 purpose"
+        pass_criteria: "purpose 描述一个核心问题"
+        fail_criteria: "purpose 包含多个不相关的问题（应拆分为多个意图）"
+      - id: L2
+        check: "无实现方案泄露"
+        pass_criteria: "purpose 和 desired_outcome 不包含技术实现细节"
+        fail_criteria: "在 purpose/desired_outcome 中指定了具体技术方案"
+      - id: L3
+        check: "acceptance_criteria 无冗余"
+        pass_criteria: "每条标准验证不同的行为"
+        fail_criteria: "多条标准验证同一行为的不同表述"
+      - id: L4
+        check: "范围可在一个 SDC 循环内完成"
+        pass_criteria: "预估可在合理时间内完成（取决于意图类型）"
+        fail_criteria: "范围过大，需要分解"
+
+  E:
+    name: "Executable"
+    name_zh: "可执行"
+    automation: ai_auto
+    items:
+      - id: E1
+        check: "acceptance_criteria 均有 verification"
+        pass_criteria: "每条标准指定了验证方式（automated_test/human_review/hybrid/performance_benchmark）"
+        fail_criteria: "任何标准缺少 verification 字段"
+      - id: E2
+        check: "性能标准有基线"
+        pass_criteria: "performance_benchmark 类标准包含量化基线（如 P95 < 200ms）"
+        fail_criteria: "性能标准仅有定性描述（如'足够快'）"
+      - id: E3
+        check: "context_references 可解析"
+        pass_criteria: "引用的文件/链接/意图 ID 格式合法且存在"
+        fail_criteria: "引用格式错误或指向不存在的资源"
+      - id: E4
+        check: "constraints 无矛盾"
+        pass_criteria: "约束条目之间不存在逻辑矛盾"
+        fail_criteria: "约束 A 和约束 B 互相冲突"
+      - id: E5
+        check: "intent_type 已指定"
+        pass_criteria: "intent_type 字段有合法枚举值"
+        fail_criteria: "intent_type 为空或不在枚举范围内"
+
+  A:
+    name: "Assessable"
+    name_zh: "可评估"
+    automation: ai_auto
+    items:
+      - id: A1
+        check: "must 标准可自动化"
+        pass_criteria: "priority=must 的标准中，>=80% 的 verification 为 automated_test 或 performance_benchmark"
+        fail_criteria: "must 标准中 >50% 仅能 human_review（50%-80% 区间判定为 warn）"
+      - id: A2
+        check: "契约三级可映射"
+        pass_criteria: "acceptance_criteria(must)->must_pass, (should)->should_pass, constraints->must_not_violate 映射无歧义"
+        fail_criteria: "标准内容模糊，无法明确归类到契约层级"
+      - id: A3
+        check: "偏差可检测"
+        pass_criteria: "每条验收标准定义了足够清晰的'通过'状态，使得偏差可被识别"
+        fail_criteria: "标准过于主观（如'代码质量高'），无法程序化检测偏差"
+
+  R:
+    name: "Reversible"
+    name_zh: "可回退"
+    automation: needs_human
+    items:
+      - id: R1
+        check: "无不可逆操作"
+        pass_criteria: "意图实现不涉及不可逆操作（如删除生产数据、不可回滚的 schema 迁移）"
+        fail_criteria: "涉及不可逆操作且 constraints 未声明回滚策略"
+      - id: R2
+        check: "回退范围可控"
+        pass_criteria: "实现失败时的影响范围有限（单服务/单模块级别）"
+        fail_criteria: "失败影响跨多个服务或系统，无隔离机制"
+      - id: R3
+        check: "已声明回退策略"
+        pass_criteria: "涉及数据变更时 constraints 中包含回退策略说明"
+        fail_criteria: "涉及数据变更但未说明回退方案"

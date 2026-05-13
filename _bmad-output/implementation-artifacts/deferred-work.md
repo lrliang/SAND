@@ -1,5 +1,18 @@
 # Deferred Work
 
+## Deferred from: code review of 2-1-sand-create-intent-skill (2026-05-13)
+
+- **must_not_violate 无 verification 字段** — 硬约束为二元判定，设计决策。
+- **clear_check boolean 建模三态结果** — 无法区分"通过"和"接受 warn 后放行"。Schema 增强议题。
+- **Architecture 指定 local templates/ 但 Story spec 禁止创建** — 需更新架构文档或明确约定。
+- **审计事件格式与 SandAuditEvent schema 不兼容** — 两套事件格式，已在 Story 2-0 中记录。
+- **用户中途取消无清理机制** — 可能产生幽灵 ID 或残留文件。运行时增强。
+- **meta.status in_execution vs 架构 kebab-case 规则** — 命名约定统一议题。
+- **FR12 边界条件主动识别职责边界** — 可能属于 sand-run 而非 sand-create-intent。
+- **version/generated_at 非 required + additionalProperties:false** — Schema 演进议题。
+- **constraints 子域无 minItems + 模板默认空数组** — DX 改善。
+- **CLEAR 失败修正无最大重试次数** — 流程增强。
+
 ## Deferred from: code review of 1-0-assess-theory-foundation (2026-05-13)
 
 - **design-principles.md 和 README.md 中 Cao 映射需更新** — `docs/01-foundations/design-principles.md` 和 `docs/01-foundations/README.md` 中"原生嵌入原则 → Cao 的 AI 原生定义"映射需要同步更新，因为 ai-native-definition.md 已将理论来源从 Cao 迁移到 Hassan SE 3.0 + 行业来源。超出 Story 1-0 范围，建议在 Story 2-0（Intent 理论基础）中一并处理。
