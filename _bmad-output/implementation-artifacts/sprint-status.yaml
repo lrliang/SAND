@@ -1,0 +1,58 @@
+# Sprint Status - SAND
+# Strategy: 混合拆分 — 每个 Skill Epic 包含 Story 0（理论基础文档完善）
+# Created: 2026-05-13
+# Last Updated: 2026-05-13
+
+# ── STATUS DEFINITIONS ──
+# backlog     — Story not yet started
+# ready-for-dev — Story file created, ready for dev agent
+# in-progress — Dev agent actively working
+# review      — Code review in progress
+# done        — Story completed and verified
+# blocked     — Cannot proceed, dependency issue
+
+current_sprint: "Sprint 1 — Phase 1 Core Skills + Infrastructure"
+sprint_goal: "验证 SAND 可执行方法论核心假设：诊断即处方（assess）+ 意图驱动协作（intent）+ 交付验证（validate）"
+last_updated: "2026-05-14"
+
+development_status:
+  # ── Epic 1: sand-assess-maturity（成熟度评估 + 框架基础设施）──
+  epic-1: in-progress
+  1-0-assess-theory-foundation: done
+  1-1-repo-skeleton-sandskill-schema: backlog
+  1-2-sand-assess-maturity-skill: backlog
+
+  # ── Epic 2: sand-create-intent（意图管理）──
+  epic-2: backlog
+  2-0-intent-theory-foundation: backlog
+  2-1-sand-create-intent-skill: backlog
+
+  # ── Epic 3: sand-validate-delivery（交付验证）──
+  epic-3: backlog
+  3-0-validate-theory-foundation: backlog
+  3-1-sand-validate-delivery-skill: backlog
+
+  # ── Epic 4: sand-design-orchestration + 执行引擎（Phase 2）──
+  epic-4: backlog
+  4-0-orchestrate-theory-foundation: backlog
+  4-1-sand-design-orchestration-skill: backlog
+  4-2-sand-run-execution-engine: backlog
+  4-3-plugin-validation-contributor-tools: backlog
+
+  # ── Epic 5: sand-governance-audit（Phase 2）──
+  epic-5: backlog
+  5-0-governance-theory-foundation: backlog
+  5-1-sand-governance-audit-skill: backlog
+
+  # ── Epic 6: sand-run-retrospective（Phase 2-3）──
+  epic-6: backlog
+  6-0-learn-theory-foundation: backlog
+  6-1-sand-run-retrospective-basic: backlog
+  6-2-sand-run-retrospective-full: backlog
+
+  # ── Epic 7: Agent 角色 + 度量 + 生态完善（Phase 3）──
+  epic-7: backlog
+  7-0-operate-theory-foundation: backlog
+  7-1-sand-measure-light-skill: backlog
+  7-2-agent-role-skills: backlog
+  7-3-skill-auto-discovery-docs: backlog
