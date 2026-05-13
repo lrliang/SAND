@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sand-framework.dev/schemas/orchestration-plan.schema.json",
+  "title": "SAND Orchestration Plan",
+  "description": "Orchestration plan output from sand-design-orchestration Skill.",
+  "type": "object",
+  "required": [
+    "plan_id",
+    "intent_id",
+    "topology",
+    "human_oversight"
+  ],
+  "properties": {
+    "plan_id": {
+      "type": "string",
+      "description": "Unique orchestration plan identifier."
+    },
+    "intent_id": {
+      "type": "string",
+      "pattern": "^INT-\\d{8}-\\d{3,}$",
+      "description": "Associated intent identifier."
+    },
+    "topology": {
+      "type": "string",
+      "enum": ["solo", "pipeline", "swarm", "hierarchy"],
+      "description": "Selected agent orchestration topology."
+    },
+    "human_oversight": {
+      "type": "string",
+      "enum": ["hip-1", "hip-2", "hip-3"],
+      "description": "Human Intervention Protocol level for this execution."
+    },
+    "skill_chain": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["skill_name", "order"],
+        "properties": {
+          "skill_name": {
+            "type": "string",
+            "pattern": "^sand-[a-z][a-z0-9-]*$"
+          },
+          "order": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "input_mapping": {
+            "type": "object",
+            "description": "Maps this Skill's inputs to previous Skill outputs."
+          },
+          "is_external": {
+            "type": "boolean",
+            "description": "Whether this is an external plugin Skill."
+          }
+        }
+      },
+      "description": "Ordered chain of Skills to execute."
+    },
+    "context_scope": {
+      "type": "object",
+      "properties": {
+        "include_files": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "exclude_patterns": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      },
+      "description": "Context scope configuration for AI model interactions."
+    },
+    "meta": {
+      "type": "object",
+      "properties": {
+        "created_at": { "type": "string", "format": "date-time" },
+        "topology_rationale": { "type": "string" }
+      }
+    }
+  },
+  "additionalProperties": false
+}

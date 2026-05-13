@@ -20,3 +20,6 @@ Desktop.ini
 .claude/
 
 test.txt
+
+# SAND Runtime Artifacts
+.sand/

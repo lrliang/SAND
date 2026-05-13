@@ -1,0 +1,23 @@
+# SAND Intent Statement Template
+# Schema: schemas/intent-statement.schema.json
+# Created by: sand-create-intent Skill
+# Usage: Copy this template and fill in all required fields.
+
+intent_id: "INT-YYYYMMDD-001"
+intent_type: feature
+purpose: ""
+desired_outcome: ""
+acceptance_criteria:
+  - ""
+constraints:
+  must_not_violate:
+    - ""
+  should_respect:
+    - ""
+context_references:
+  - ""
+meta:
+  author: ""
+  created_at: null
+  status: draft
+  sdc_layer: L1-individual

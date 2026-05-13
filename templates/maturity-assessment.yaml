@@ -1,0 +1,48 @@
+# SAND Maturity Assessment Template
+# Schema: schemas/maturity-assessment.schema.json
+# Created by: sand-assess-maturity Skill
+# Usage: Output from a completed maturity assessment session.
+
+assessment_id: ""
+team_id: ""
+timestamp: null
+mode: initial-diagnosis
+dimensions:
+  - id: D1
+    name: "AI \u5DE5\u5177\u91C7\u7EB3\u5EA6"
+    level: 1
+    evidence: []
+    notes: ""
+  - id: D2
+    name: "\u610F\u56FE\u9A71\u52A8\u6210\u719F\u5EA6"
+    level: 1
+    evidence: []
+    notes: ""
+  - id: D3
+    name: "\u7F16\u6392\u80FD\u529B"
+    level: 1
+    evidence: []
+    notes: ""
+  - id: D4
+    name: "\u4EBA\u7C7B\u5BA1\u67E5\u4F53\u7CFB"
+    level: 1
+    evidence: []
+    notes: ""
+  - id: D5
+    name: "\u5B66\u4E60\u4E0E\u8D44\u4EA7\u5316"
+    level: 1
+    evidence: []
+    notes: ""
+  - id: D6
+    name: "\u6CBB\u7406\u4E0E\u5408\u89C4"
+    level: 1
+    evidence: []
+    notes: ""
+  - id: D7
+    name: "\u7EC4\u7EC7\u6587\u5316"
+    level: 1
+    evidence: []
+    notes: ""
+organizational_shape: null
+improvement_pathways: []
+assessor: ""

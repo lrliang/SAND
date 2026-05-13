@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sand-framework.dev/schemas/execution-contract.schema.json",
+  "title": "SAND Execution Contract",
+  "description": "Three-tier execution contract generated from a validated intent statement.",
+  "type": "object",
+  "required": [
+    "contract_id",
+    "intent_id",
+    "must_pass",
+    "should_pass",
+    "must_not_violate"
+  ],
+  "properties": {
+    "contract_id": {
+      "type": "string",
+      "description": "Unique contract identifier."
+    },
+    "intent_id": {
+      "type": "string",
+      "pattern": "^INT-\\d{8}-\\d{3,}$",
+      "description": "Associated intent identifier."
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^v\\d+\\.\\d+$",
+      "description": "Contract version (e.g., 'v1.0')."
+    },
+    "must_pass": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "description"],
+        "properties": {
+          "id": { "type": "string" },
+          "description": { "type": "string" },
+          "verification": { "type": "string" }
+        }
+      },
+      "description": "Conditions that MUST pass for the delivery to be accepted."
+    },
+    "should_pass": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "description"],
+        "properties": {
+          "id": { "type": "string" },
+          "description": { "type": "string" },
+          "verification": { "type": "string" }
+        }
+      },
+      "description": "Conditions that SHOULD pass (conditional acceptance if failed with justification)."
+    },
+    "must_not_violate": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "description"],
+        "properties": {
+          "id": { "type": "string" },
+          "description": { "type": "string" },
+          "verification": { "type": "string" }
+        }
+      },
+      "description": "Hard constraints that must NEVER be violated."
+    },
+    "clear_check": {
+      "type": "object",
+      "properties": {
+        "complete": { "type": "boolean" },
+        "lean": { "type": "boolean" },
+        "executable": { "type": "boolean" },
+        "assessable": { "type": "boolean" },
+        "reversible": { "type": "boolean" }
+      },
+      "description": "CLEAR quality check results from intent validation."
+    },
+    "meta": {
+      "type": "object",
+      "properties": {
+        "generated_at": { "type": "string", "format": "date-time" },
+        "generated_from": { "type": "string" }
+      }
+    }
+  },
+  "additionalProperties": false
+}

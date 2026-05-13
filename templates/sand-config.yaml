@@ -1,0 +1,8 @@
+# SAND Project Configuration
+# Location: .sand/config.yaml (in user's project root)
+# Usage: Initialize with `cp {sand-root}/templates/sand-config.yaml .sand/config.yaml`
+
+sand_version: "0.1.0"
+team_id: ""
+default_human_oversight: hip-2
+output_language: zh-CN

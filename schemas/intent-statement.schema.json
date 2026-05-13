@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sand-framework.dev/schemas/intent-statement.schema.json",
+  "title": "SAND Intent Statement",
+  "description": "Structured intent statement with 7 fields. Created by sand-create-intent Skill.",
+  "type": "object",
+  "required": [
+    "intent_id",
+    "intent_type",
+    "purpose",
+    "desired_outcome",
+    "acceptance_criteria",
+    "constraints",
+    "meta"
+  ],
+  "properties": {
+    "intent_id": {
+      "type": "string",
+      "pattern": "^INT-\\d{8}-\\d{3,}$",
+      "description": "Unique intent identifier (format: INT-YYYYMMDD-{seq})."
+    },
+    "intent_type": {
+      "type": "string",
+      "enum": ["feature", "fix", "refactor", "exploration", "optimization"],
+      "description": "Intent classification type."
+    },
+    "purpose": {
+      "type": "string",
+      "minLength": 1,
+      "description": "What problem are we solving and why."
+    },
+    "desired_outcome": {
+      "type": "string",
+      "minLength": 1,
+      "description": "What success looks like when this intent is fulfilled."
+    },
+    "acceptance_criteria": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "description": "Testable conditions that must be satisfied."
+    },
+    "constraints": {
+      "type": "object",
+      "properties": {
+        "must_not_violate": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Hard constraints that must never be broken."
+        },
+        "should_respect": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Soft constraints to respect where possible."
+        }
+      },
+      "description": "Boundaries the implementation must operate within."
+    },
+    "context_references": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "File paths or document references providing context."
+    },
+    "meta": {
+      "type": "object",
+      "properties": {
+        "author": { "type": "string" },
+        "created_at": { "type": "string", "format": "date-time" },
+        "status": {
+          "type": "string",
+          "enum": ["draft", "reviewed", "approved", "in-execution", "validated", "archived"]
+        },
+        "sdc_layer": {
+          "type": "string",
+          "enum": ["L1-individual", "L2-team", "L3-product", "L4-organization"]
+        }
+      },
+      "description": "Metadata about the intent statement."
+    }
+  },
+  "additionalProperties": false
+}

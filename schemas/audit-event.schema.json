@@ -1,0 +1,133 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sand-framework.dev/schemas/audit-event.schema.json",
+  "title": "SandAuditEvent",
+  "description": "Audit event recorded by SandRuntime for every Skill step execution. Appended as JSONL to .sand/audits/audit.jsonl.",
+  "type": "object",
+  "required": [
+    "event_id",
+    "timestamp",
+    "sand_version",
+    "skill_name",
+    "skill_version",
+    "sdc_phase",
+    "actor",
+    "host",
+    "status"
+  ],
+  "properties": {
+    "event_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique event identifier (UUID v4)."
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO-8601 UTC timestamp (e.g., '2026-05-12T14:30:00Z')."
+    },
+    "sand_version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "SAND framework version at time of execution."
+    },
+    "intent_id": {
+      "type": "string",
+      "pattern": "^INT-\\d{8}-\\d{3,}$",
+      "description": "Associated intent identifier (format: INT-YYYYMMDD-{seq})."
+    },
+    "execution_id": {
+      "type": "string",
+      "pattern": "^EXE-.+$",
+      "description": "Execution session identifier (format: EXE-{session_id})."
+    },
+    "skill_name": {
+      "type": "string",
+      "pattern": "^sand-[a-z][a-z0-9-]*$",
+      "description": "Name of the executed Skill."
+    },
+    "skill_version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "Version of the executed Skill."
+    },
+    "sdc_phase": {
+      "type": "string",
+      "enum": [
+        "assess",
+        "intent",
+        "orchestrate",
+        "build",
+        "validate",
+        "operate",
+        "learn",
+        "governance"
+      ],
+      "description": "SDC phase of the executed Skill."
+    },
+    "step": {
+      "type": "string",
+      "pattern": "^step-\\d{2}-.+$",
+      "description": "Step identifier (format: step-{NN}-{name})."
+    },
+    "actor": {
+      "type": "string",
+      "enum": ["human", "agent"],
+      "description": "Who triggered this step."
+    },
+    "host": {
+      "type": "string",
+      "enum": ["claude-code", "cursor", "codex-cli", "gemini-cli"],
+      "description": "IDE/CLI host executing the Skill."
+    },
+    "model_used": {
+      "type": "string",
+      "description": "AI model identifier used during execution (free-form string)."
+    },
+    "input_hash": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$",
+      "description": "SHA-256 hash of all declared input files."
+    },
+    "output_hash": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$",
+      "description": "SHA-256 hash of all declared output files."
+    },
+    "status": {
+      "type": "string",
+      "enum": ["success", "failure", "interrupted"],
+      "description": "Execution outcome. All three states are recorded (NFR16)."
+    },
+    "human_confirmations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["step", "timestamp", "decision"],
+        "properties": {
+          "step": {
+            "type": "string",
+            "description": "Step at which human confirmation occurred."
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "description": "ISO-8601 UTC timestamp of the confirmation."
+          },
+          "decision": {
+            "type": "string",
+            "enum": ["approved", "rejected", "deferred"],
+            "description": "Human decision at this confirmation point."
+          }
+        },
+        "additionalProperties": false
+      },
+      "description": "Record of human intervention points during execution."
+    },
+    "error": {
+      "type": ["string", "null"],
+      "description": "Error message if status is 'failure' or 'interrupted', null otherwise."
+    }
+  },
+  "additionalProperties": false
+}

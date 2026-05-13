@@ -1,0 +1,143 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sand-framework.dev/schemas/sandskill.v1.schema.json",
+  "title": "sandskill.v1 Contract",
+  "description": "SAND Skill contract specification v1. Defines the SKILL.md YAML frontmatter structure. Forward-compatible for >= 18 months from publication.",
+  "type": "object",
+  "required": [
+    "sand_contract",
+    "name",
+    "version",
+    "description",
+    "sdc_phase",
+    "entry_point",
+    "requires",
+    "inputs",
+    "outputs"
+  ],
+  "properties": {
+    "sand_contract": {
+      "type": "string",
+      "const": "sandskill.v1",
+      "description": "Contract version identifier. Must be 'sandskill.v1'."
+    },
+    "name": {
+      "type": "string",
+      "pattern": "^sand-[a-z][a-z0-9-]*$",
+      "description": "Skill name in sand-{kebab-case} format."
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "Skill version in SemVer format (MAJOR.MINOR.PATCH)."
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1,
+      "description": "One-line description of the Skill's purpose."
+    },
+    "sdc_phase": {
+      "type": "string",
+      "enum": [
+        "assess",
+        "intent",
+        "orchestrate",
+        "build",
+        "validate",
+        "operate",
+        "learn",
+        "governance"
+      ],
+      "description": "The SDC phase this Skill belongs to."
+    },
+    "entry_point": {
+      "type": "string",
+      "description": "Relative path to the Skill entry point file (typically 'SKILL.md')."
+    },
+    "requires": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "file_read",
+          "file_write",
+          "shell_exec",
+          "network_access",
+          "agent_subprocess",
+          "mcp_support"
+        ]
+      },
+      "minItems": 1,
+      "uniqueItems": true,
+      "description": "Host capability requirements. Skills fail fast on unsupported hosts."
+    },
+    "inputs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Input file declarations (glob patterns or explicit paths using {sand-root}/ or .sand/ anchors)."
+    },
+    "outputs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Output file declarations (paths using .sand/ anchors)."
+    },
+    "author": {
+      "type": "string",
+      "description": "Skill author or team name."
+    },
+    "customize_schema": {
+      "type": "string",
+      "description": "Relative path to a JSON Schema file for validating customize.toml."
+    },
+    "dependencies": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^sand-[a-z][a-z0-9-]*$"
+      },
+      "description": "Other SAND Skills this Skill depends on (Phase 3+)."
+    },
+    "human_oversight": {
+      "type": "string",
+      "enum": ["hip-1", "hip-2", "hip-3"],
+      "description": "Default Human Intervention Protocol level. hip-1=autonomous, hip-2=key decisions reviewed, hip-3=full supervision."
+    },
+    "license": {
+      "type": "string",
+      "description": "SPDX license identifier."
+    },
+    "model_requirement": {
+      "type": "object",
+      "properties": {
+        "reasoning": {
+          "type": "string",
+          "enum": ["low", "medium", "high"],
+          "description": "Required reasoning capability level."
+        },
+        "context_window": {
+          "type": "string",
+          "description": "Minimum context window size (e.g., '128K')."
+        }
+      },
+      "additionalProperties": false,
+      "description": "Model capability requirements (not model names — model agnostic)."
+    },
+    "sand_min_version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "Minimum SAND framework version required (SemVer)."
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Categorization tags for discovery."
+    }
+  },
+  "additionalProperties": false
+}

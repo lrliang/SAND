@@ -1,0 +1,20 @@
+# SAND Orchestration Plan Template
+# Schema: schemas/orchestration-plan.schema.json
+# Created by: sand-design-orchestration Skill
+# Usage: Output from a completed orchestration design session.
+
+plan_id: ""
+intent_id: "INT-YYYYMMDD-001"
+topology: solo
+human_oversight: hip-2
+skill_chain:
+  - skill_name: sand-create-intent
+    order: 1
+    input_mapping: {}
+    is_external: false
+context_scope:
+  include_files: []
+  exclude_patterns: []
+meta:
+  created_at: null
+  topology_rationale: ""

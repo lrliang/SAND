@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sand-framework.dev/schemas/maturity-assessment.schema.json",
+  "title": "SAND Maturity Assessment",
+  "description": "7-dimension maturity assessment output from sand-assess-maturity Skill.",
+  "type": "object",
+  "required": [
+    "assessment_id",
+    "team_id",
+    "timestamp",
+    "mode",
+    "dimensions"
+  ],
+  "properties": {
+    "assessment_id": {
+      "type": "string",
+      "description": "Unique assessment identifier."
+    },
+    "team_id": {
+      "type": "string",
+      "description": "Team or organization identifier."
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO-8601 UTC timestamp of assessment completion."
+    },
+    "mode": {
+      "type": "string",
+      "enum": ["initial-diagnosis", "cycle-calibration"],
+      "description": "Assessment mode: full initial diagnosis or quick cycle calibration."
+    },
+    "dimensions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "level"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^D[1-7]$"
+          },
+          "name": { "type": "string" },
+          "level": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 5
+          },
+          "evidence": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Evidence collected during assessment."
+          },
+          "notes": {
+            "type": "string",
+            "description": "Assessor notes for this dimension."
+          }
+        }
+      },
+      "minItems": 7,
+      "maxItems": 7,
+      "description": "All 7 maturity dimensions with assessed levels."
+    },
+    "organizational_shape": {
+      "type": "string",
+      "enum": ["balanced", "skewed", "spiked"],
+      "description": "Detected organizational shape from radar chart analysis."
+    },
+    "improvement_pathways": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "target_dimension": { "type": "string" },
+          "current_level": { "type": "integer" },
+          "target_level": { "type": "integer" },
+          "recommended_skill": { "type": "string" },
+          "timeframe": { "type": "string" },
+          "expected_roi": { "type": "string" }
+        }
+      },
+      "description": "Recommended improvement pathways for red dimensions."
+    },
+    "assessor": {
+      "type": "string",
+      "description": "Person who conducted the assessment."
+    }
+  },
+  "additionalProperties": false
+}
