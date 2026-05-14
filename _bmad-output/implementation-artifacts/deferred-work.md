@@ -1,5 +1,13 @@
 # Deferred Work
 
+## Deferred from: code review of 5-0-governance-theory-foundation (2026-05-14)
+
+- **W1: quality_gates TOML 块无 Schema 定义** — quality-governance.md 中 `[quality_gates]` 配置块（clear_check_min_pass, contract_check_must_pass 等）为说明性示例，无对应 Schema 或 customize.toml 验证。未来 Skill 实现时需定义。
+- **W2: .sand/config.yaml 无 risk-level 字段** — compliance-governance.md 引用 `.sand/config.yaml` 配置风险等级和 HIP 默认值，但 `templates/sand-config.yaml` 模板无此字段。Schema 增强议题。
+- **W3: Validation Results 层无直接 Schema 字段** — audit-governance.md 六层证据链模型的第六层"验证结果"数据来自 decision-matrix/deviations.json 而非 audit-event.schema.json。Story 5-1 需跨数据源聚合。
+- **W4: decision-governance.md 行数 (~125 行) 低于 150-200 行目标** — 内容实质完整，篇幅略低于文档编写规范要求。
+- **W5: compliance-governance.md 行数 (~131 行) 低于 150-200 行目标** — 内容实质完整，篇幅略低于文档编写规范要求。
+
 ## Deferred from: code review of 4-3-plugin-validation-contributor-tools (2026-05-14)
 
 - **W1: `get_array_items` 无法解析 inline YAML 数组** — `requires: [file_read, file_write]` 风格的 flow-sequence 不被识别。需完整 YAML 解析或添加 inline 模式支持。
