@@ -1,5 +1,16 @@
 # Deferred Work
 
+## Deferred from: code review of 4-2-sand-run-execution-engine (2026-05-14)
+
+- **W1: skill_chain 非 Schema required** — orchestration-plan.schema.json 仅 required plan_id/intent_id/topology/human_oversight，skill_chain 可能完全缺失。step-01 需防御性检查。
+- **W2: context_scope/meta 为可选属性** — step-01 无条件读取但 Schema 允许缺失。需防御检查。
+- **W3: execution.yaml failure 状态无产生路径** — step-02 仅产生 completed/partial/interrupted，failure 为 step-03 定义的未来保留状态。
+- **W4: SHA-256 拼接顺序未定义** — 不同文件拼接顺序产生不同 hash，需统一为声明顺序。
+- **W5: 断点恢复流程与新会话创建混合** — step-01 恢复时仍执行第 5-7 节，需条件跳过逻辑。
+- **W6: session_id EXE- 前缀语义** — execution.yaml 内 session_id 含 EXE- 前缀与目录名一致但语义双重。
+- **W7: deviations.json 在 sand-run 阶段不存在** — step-03 已优雅处理，正常设计。
+- **W8: 并发 session_id 碰撞** — 无文件锁，单用户低概率，Phase 3 多 Agent 需解决。
+
 ## Deferred from: code review of 4-1-sand-design-orchestration-skill (2026-05-14)
 
 - **W1: plan_id 格式无 Schema pattern 约束** — step-04 定义 `OP-YYYYMMDD-{seq}` 但 Schema 仅 `type: string`，与 intent_id 的严格 pattern 不一致。Schema 增强议题。

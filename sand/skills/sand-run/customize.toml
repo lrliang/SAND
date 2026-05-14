@@ -1,0 +1,17 @@
+# sand-run 定制化配置
+# 3 层 merge 语义：base → team → user
+# 标量覆盖、表深合并、数组追加
+
+[workflow]
+
+# 激活前步骤
+activation_steps_prepend = []
+
+# 激活后步骤
+activation_steps_append = []
+
+# 持久化事实——sand-run 从编排方案动态加载上下文，不依赖固定理论文档
+persistent_facts = []
+
+# 完成后钩子
+on_complete = ""
