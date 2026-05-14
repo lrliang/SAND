@@ -1,0 +1,90 @@
+# sand-validate-delivery 验证报告模板
+# 由 step-04-decision.md 填充并输出到 .sand/executions/EXE-{session_id}/validation-report.yaml
+
+validation_report:
+  session_id: null
+  intent_id: null
+  timestamp: null
+  overall_result: null  # pass | pass_with_warnings | fail
+
+  channels:
+    contract:
+      result: null  # pass | pass_with_warnings | fail
+      must_pass_results: []
+      # - id: "MP-001"
+      #   status: "pass"  # or "fail"
+      #   evidence: "description of evidence"
+      should_pass_results: []
+      # - id: "SP-001"
+      #   status: "pass"  # or "fail"
+      #   evidence: "description of evidence"
+      must_not_violate_results: []
+      # - id: "MNV-001"
+      #   status: "pass"  # or "violated"
+      #   evidence: "description of evidence"
+      intent_alignment_score: null  # 推断控制输出
+
+    security:
+      result: null  # pass | pass_with_warnings | fail
+      check_results: []
+      # - check: "injection"
+      #   status: "pass"  # or "fail"
+      #   detail: "description"
+      license_warnings: []
+      # - dependency: "library-name"
+      #   license: "LGPL-2.1"
+      #   compatible: false
+      #   recommendation: "suggested action"
+
+    architecture:
+      result: null  # pass | pass_with_warnings | fail
+      check_results: []
+      # - check: "naming_convention"
+      #   status: "pass"  # or "fail" or "warning"
+      #   detail: "description"
+
+  decision:
+    result: null  # pass | conditional_pass | reject_to_build | redirect_to_intent
+    timestamp: null
+    channels_summary:
+      contract: null  # pass | pass_with_warnings | fail
+      security: null  # pass | pass_with_warnings | fail
+      architecture: null  # pass | pass_with_warnings | fail
+    next_action: null  # operate | build | intent
+    tech_debt_items: []
+    # - source_channel: "security"
+    #   check_item: "license_compatibility"
+    #   description: "description of tech debt"
+    #   suggested_deadline: "YYYY-MM-DD"
+    #   severity: warning
+    fix_guidance: null
+    # failed_checks:
+    #   - channel: "contract"
+    #     check_item: "must_pass_item_3"
+    #     failure_reason: "reason"
+    #     suggested_fix: "suggestion"
+    # other_channel_warnings:
+    #   - channel: "security"
+    #     check_item: "license_compatibility"
+    #     description: "description"
+    # revalidation_required: true
+    intent_correction: null
+    # intent_id: "INT-YYYYMMDD-{seq}"
+    # correction_reason: "reason"
+    # affected_fields:
+    #   - field: "acceptance_criteria"
+    #     issue: "issue description"
+    #     suggestion: "suggestion"
+    # revalidation_required: true
+    # full_cycle_required: true
+    human_confirmation:
+      required: true
+      hip_level: "hip-2"
+      confirmed_by: null
+      confirmed_at: null
+
+  deviations: []
+  # references to deviations.json entries by deviation_id
+
+  human_review_required: true
+  hip_level: "hip-2"

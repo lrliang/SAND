@@ -1,5 +1,25 @@
 # Deferred Work
 
+## Deferred from: code review of 3-1-sand-validate-delivery-skill (2026-05-13)
+
+- **D1: 空 must_pass 数组产生空 PASS** — schema 允许 minItems:0，空契约会 vacuously pass。运行时需添加 must_pass 非空验证或警告。
+- **D2: Session ID seq 碰撞** — 无文件系统扫描机制确定当日序号，并发运行可能碰撞。运行时需扫描 .sand/executions/ 确定下一个序号。
+- **D3: verification method 无工具降级路径** — 若 verification="performance_benchmark" 但无基准测试工具，step-01 无降级逻辑。参考 step-02 的降级模式。
+- **D4: 零依赖项目 CVE 检查未定义** — 无依赖清单时 step-02 check 4 行为未明确。建议输出 "not_applicable"。
+- **D5: 无法检测前序 step 部分完成** — 用户中途中止后跳到 step-04，部分完成的通道可能被视为完整。需运行时状态检查。
+- **D6: 重复运行 deviations.json 覆盖** — 同一 session 重新验证时无幂等性保证。建议追加或版本化。
+- **D7: 扁平项目依赖方向检查误报** — 无分层架构的项目可能在 blocking 级检查上误报。step-03 FAILURE MODES 有降级提示但未覆盖此具体场景。
+- **D8: FR32 检查假设 audit.jsonl 存在** — 若 Build 阶段未启用审计，audit.jsonl 缺失被视为 blocking fail 而非 benign。
+
+## Deferred from: code review of 3-0-validate-theory-foundation (2026-05-13)
+
+- **D1: 意图偏差信号在非 contract-FAIL 场景下未定义** — 意图对齐度分析产生偏差信号时，若 contract 通道非 FAIL（如 PASS_W），该信号被判定表忽略。Story 3-1 实现设计时需明确处理。
+- **D2: 三通道无 ERROR/TIMEOUT/INDETERMINATE 状态处理** — 通道结果仅定义 PASS/PASS_WITH_WARNINGS/FAIL 三态，无法表示通道执行失败或超时。Story 3-1 实现设计时需定义 fallback 策略。
+- **D3: source_channel 为单值枚举，跨通道偏差不可表示** — 同一问题可能跨越安全和架构两个通道，当前数据结构无法表示。Story 3-1 实现时考虑多偏差事件 + 交叉引用。
+- **D4: info 级偏差自动 resolved 后无法被人类重新分类** — 自动处理发生在人类审查之前，无重新分类机制。Story 3-1 实现增强。
+- **D5: learning_signal 可选导致飞轮静默退化** — 无完整度指标追踪 learning_signal 填充率。Phase 3 Learn 阶段完善。
+- **D6: 通道内计算控制与推断控制冲突未定义** — 同一检查项内两种控制类型结果不一致时无优先级规则。Story 3-1 实现设计。
+
 ## Deferred from: code review of 2-1-sand-create-intent-skill (2026-05-13)
 
 - **must_not_violate 无 verification 字段** — 硬约束为二元判定，设计决策。

@@ -28,9 +28,9 @@ development_status:
   2-1-sand-create-intent-skill: done
 
   # ── Epic 3: sand-validate-delivery（交付验证）──
-  epic-3: backlog
-  3-0-validate-theory-foundation: backlog
-  3-1-sand-validate-delivery-skill: backlog
+  epic-3: in-progress
+  3-0-validate-theory-foundation: done
+  3-1-sand-validate-delivery-skill: done
 
   # ── Epic 4: sand-design-orchestration + 执行引擎（Phase 2）──
   epic-4: backlog
