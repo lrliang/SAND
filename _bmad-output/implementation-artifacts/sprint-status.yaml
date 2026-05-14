@@ -37,7 +37,7 @@ development_status:
   4-0-orchestrate-theory-foundation: done
   4-1-sand-design-orchestration-skill: done
   4-2-sand-run-execution-engine: done
-  4-3-plugin-validation-contributor-tools: backlog
+  4-3-plugin-validation-contributor-tools: done
 
   # ── Epic 5: sand-governance-audit（Phase 2）──
   epic-5: backlog

@@ -1,5 +1,16 @@
 # Deferred Work
 
+## Deferred from: code review of 4-3-plugin-validation-contributor-tools (2026-05-14)
+
+- **W1: `get_array_items` 无法解析 inline YAML 数组** — `requires: [file_read, file_write]` 风格的 flow-sequence 不被识别。需完整 YAML 解析或添加 inline 模式支持。
+- **W2: validator 未强制 additionalProperties:false** — Schema 禁止额外字段但 validator 不检查未知 key。Phase 3 lint 增强。
+- **W3: dev guide 遗漏 customize_schema/dependencies 可选字段** — Schema 定义 8 个可选属性但 guide 仅列 6 个。
+- **W4: dev guide 未文档化 registry.yaml 格式** — 贡献者无法了解外部 Skill 注册的集成路径。
+- **W5: name regex 允许尾部 dash** — `^sand-[a-z][a-z0-9-]*$` 匹配 `sand-foo-`，Schema 同此 pattern。
+- **W6: validator 未检查 name 与目录名一致性** — `sand-foo/` 下 `name: "sand-bar"` 会通过验证。
+- **W7: validator 未检查 frontmatter 字段顺序** — Architecture 要求固定顺序但 validator 仅检查存在性。
+- **W8: get_field 不处理单引号 YAML 值** — `sdc_phase: 'build'` 会保留引号导致 enum 不匹配。
+
 ## Deferred from: code review of 4-2-sand-run-execution-engine (2026-05-14)
 
 - **W1: skill_chain 非 Schema required** — orchestration-plan.schema.json 仅 required plan_id/intent_id/topology/human_oversight，skill_chain 可能完全缺失。step-01 需防御性检查。

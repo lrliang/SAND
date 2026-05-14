@@ -1,0 +1,9 @@
+# sand-example-skill workflow customization
+# 3-layer merge: base -> team -> user
+
+[workflow]
+
+activation_steps_prepend = []
+activation_steps_append = []
+persistent_facts = []
+on_complete = ""
