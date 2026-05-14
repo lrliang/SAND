@@ -1,0 +1,54 @@
+# 审计追踪报告模板
+# 由 sand-governance-audit step-03-report 填充
+# 结构定义参见 docs/02-development-cycle/governance/audit-governance.md
+
+report_metadata:
+  report_id: null
+  generated_at: null
+  time_range:
+    from: null
+    to: null
+  sand_version: null
+  total_events: 0
+  total_intents: 0
+  total_failures: 0
+  total_interruptions: 0
+
+evidence_summary: []
+# 每条格式:
+#   - intent_id: "INT-YYYYMMDD-{seq}"
+#     intent_purpose: ""
+#     execution_count: 0
+#     skill_chain: []
+#     human_confirmations_count: 0
+#     status: "success"
+#     compliance_flags: []
+
+intent_details: []
+# 每条格式:
+#   - intent_id: "INT-YYYYMMDD-{seq}"
+#     intent_purpose: ""
+#     executions:
+#       - execution_id: "EXE-{session_id}"
+#         events: []
+#     deviations: []
+#     validation_result: null
+#     NOTE: intent_purpose is enriched from .sand/intents/{intent_id}.yaml if available
+
+anomalies:
+  failures: []
+  interruptions: []
+  missing_confirmations: []
+# 每条格式:
+#   - event_id: "uuid"
+#     intent_id: ""
+#     skill_name: ""
+#     step: ""
+#     timestamp: ""
+#     reason: ""
+
+compliance_mapping:
+  # MVP: 预留结构。Phase 5 将填充行业垂直映射
+  iso_42001: []
+  eu_ai_act: []
+  nist_ai_rmf: []

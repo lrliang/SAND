@@ -40,9 +40,9 @@ development_status:
   4-3-plugin-validation-contributor-tools: done
 
   # ── Epic 5: sand-governance-audit（Phase 2）──
-  epic-5: in-progress
+  epic-5: done
   5-0-governance-theory-foundation: done
-  5-1-sand-governance-audit-skill: backlog
+  5-1-sand-governance-audit-skill: done
 
   # ── Epic 6: sand-run-retrospective（Phase 2-3）──
   epic-6: backlog

@@ -1,5 +1,11 @@
 # Deferred Work
 
+## Deferred from: code review of 5-1-sand-governance-audit-skill (2026-05-14)
+
+- **W1: human_confirmations 去重键不含 event_id** — step-02 §5 按 step+timestamp+decision 去重，同毫秒同决策的理论碰撞会丢失确认记录。Schema 无 confirmation_id 字段，需架构级扩展。
+- **W2: .sand/audits/reports/ 子目录无架构文档先例** — 架构仅定义 .sand/audits/audit.jsonl，reports 子目录为 sand-governance-audit 新增约定。需在架构文档中补充。
+- **W3: human_oversight hip-2 硬编码 vs 运行时动态读取** — SKILL.md 固定 hip-2 但 step-02 §7 运行时从 config.yaml 读取。所有 Skill 均此模式，非 bug，但文档应说明覆盖优先级。
+
 ## Deferred from: code review of 5-0-governance-theory-foundation (2026-05-14)
 
 - **W1: quality_gates TOML 块无 Schema 定义** — quality-governance.md 中 `[quality_gates]` 配置块（clear_check_min_pass, contract_check_must_pass 等）为说明性示例，无对应 Schema 或 customize.toml 验证。未来 Skill 实现时需定义。
