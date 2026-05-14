@@ -1,5 +1,15 @@
 # Deferred Work
 
+## Deferred from: code review of 4-0-orchestrate-theory-foundation (2026-05-14)
+
+- **W1: Schema vs 扩展模板结构不兼容** — `schemas/orchestration-plan.schema.json` 设置 `additionalProperties: false` 且仅定义 7 个顶层属性，但 `docs/09-templates/orchestration-plan.yaml` 引入 `context_strategy`、`agent_selection`、`failure_mode_plan` 等 Schema 未定义字段。预先存在的设计差异，需在 Phase 2 Schema 演进时统一。
+- **W2: context_quality_check 理论 4 维 vs 模板 3 字段** — 理论定义 4 个质量维度（completeness/accuracy/conciseness/discoverability），扩展模板仅有 3 个字段（缺 discoverability）。Story 4-1 实现时需决定是否扩展模板。
+- **W3: 扩展模板 parent_intent vs Schema intent_id 格式不兼容** — 扩展模板用 `parent_intent: "SAND-YYYY-NNNN"`，Schema 用 `intent_id` pattern `^INT-\d{8}-\d{3,}$`。预先存在的 ID 格式冲突。
+- **W4: Swarm/Hierarchy 最少 Agent 数量未定义** — 1 Agent Swarm 退化为 2 节点 Pipeline（1 worker + aggregator），1 Worker Hierarchy 退化为带额外开销的 Solo。无最小 Agent 数量约束。Story 4-1 实现 topology-rules.yaml 时需定义。
+- **W5: HIP 信任降级阈值 N 未量化** — 信任降级机制触发条件"连续 N 次"的 N 值未定义。运行时配置参数，Story 4-1 step-03-hip.md 需定义默认值或范围。
+- **W6: Domain-Reset 的"领域"定义未明确** — "新领域"判定标准为".sand/ 中无该领域的历史执行记录"，但"领域"本身（代码目录？技术栈？业务功能？capability_domain 值？）未定义。运行时操作化。
+- **W7: FR 可追溯性跨文档不一致** — context-engineering.md 显式引用 FR32-FR33，human-intervention.md 引用 FR17，但 topology-patterns.md、agent-selection.md、failure-modes.md 未引用 FR 编号。非阻塞一致性议题。
+
 ## Deferred from: code review of 3-1-sand-validate-delivery-skill (2026-05-13)
 
 - **D1: 空 must_pass 数组产生空 PASS** — schema 允许 minItems:0，空契约会 vacuously pass。运行时需添加 must_pass 非空验证或警告。
