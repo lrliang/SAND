@@ -1,0 +1,157 @@
+# SAND 拓扑选型规则
+# 来源：docs/02-development-cycle/orchestrate/topology-patterns.md
+# 用途：sand-design-orchestration Skill 的 step-02-topology 引用此文件
+
+# ── 4 种标准拓扑定义 ──
+
+topologies:
+  - id: solo
+    name: "Solo（独奏）"
+    definition: "单个 Agent 独立完成全部任务，通过工具链扩展能力边界"
+    min_agents: 1
+    advantages:
+      - "最低协调开销——无 Agent 间通信成本"
+      - "上下文完整——单一 Agent 持有全部信息"
+      - "调试简单——行为可追踪、可复现"
+    disadvantages:
+      - "单点能力瓶颈——受限于单一模型能力上限"
+      - "上下文窗口压力——复杂任务可能超出有效上下文"
+      - "无内置检查机制——缺少 Agent 间交叉验证"
+    industry_pattern: "单 Agent + 工具链"
+
+  - id: pipeline
+    name: "Pipeline（流水线）"
+    definition: "多个 Agent 按严格顺序执行，前一个输出作为后一个输入"
+    min_agents: 2
+    advantages:
+      - "流程清晰——每步职责明确，便于审计"
+      - "中间产物可检查——每个交接点都是潜在 HIP 审查点"
+      - "故障隔离——某步失败不影响已完成步骤"
+    disadvantages:
+      - "总执行时间 = 各步时间之和（无并行加速）"
+      - "上下文衰减——长链条后端 Agent 可能丢失前端信息"
+      - "单链脆弱——任一步骤失败则整条链停滞"
+    industry_pattern: "顺序传递链"
+
+  - id: swarm
+    name: "Swarm（蜂群）"
+    definition: "多个 Agent 并行执行独立子任务，结果由聚合器合并"
+    min_agents: 3  # 2 worker + 1 aggregator
+    advantages:
+      - "并行加速——总时间约等于最慢子任务时间"
+      - "方案多样性——多 Agent 可探索不同路径"
+      - "容错性——单个 Agent 失败不阻塞其他"
+    disadvantages:
+      - "聚合复杂——需要合并逻辑处理冲突结果"
+      - "协调税——准确率增益在 4 Agent 后趋于饱和"
+      - "上下文一致性风险——并行 Agent 可能基于不同假设工作"
+    industry_pattern: "Fan-Out / Fan-In 并行"
+
+  - id: hierarchy
+    name: "Hierarchy（层级）"
+    definition: "管理者 Agent 将任务分解并分配给 Worker Agent，可嵌套"
+    min_agents: 3  # 1 manager + 2 worker
+    advantages:
+      - "分治策略——复杂问题被分解为可管理的子问题"
+      - "专业化——每个 Worker 专注于其擅长领域"
+      - "可扩展——通过添加层级适应更大规模"
+    disadvantages:
+      - "最高协调开销——管理者 Agent 自身消耗资源"
+      - "信息瓶颈——管理者可能成为通信瓶颈"
+      - "级联失败风险——管理者判断错误会传播到所有 Worker"
+    industry_pattern: "Orchestrator-Worker 多层级"
+
+# ── 不确定性 × 规模选型矩阵 ──
+
+selection_matrix:
+  # 格式：uncertainty_level / scale → recommended_topology
+  - uncertainty: low
+    scale: small
+    topology: solo
+  - uncertainty: low
+    scale: medium
+    topology: pipeline
+  - uncertainty: low
+    scale: large
+    topology: pipeline  # 或 hierarchy
+    alternatives: [hierarchy]
+  - uncertainty: medium
+    scale: small
+    topology: solo  # 或 pipeline
+    alternatives: [pipeline]
+  - uncertainty: medium
+    scale: medium
+    topology: pipeline
+  - uncertainty: medium
+    scale: large
+    topology: hierarchy
+  - uncertainty: high
+    scale: small
+    topology: solo  # 探索模式
+    note: "exploration_mode"
+  - uncertainty: high
+    scale: medium
+    topology: swarm
+  - uncertainty: high
+    scale: large
+    topology: hierarchy
+    note: "hierarchy_with_swarm_nested"
+    alternatives: [swarm]
+
+# ── 意图类型 × 拓扑推荐关联 ──
+
+intent_type_mapping:
+  - intent_type: feature
+    primary_topology: pipeline
+    alternatives: [swarm, hierarchy]
+    rationale: "新功能通常有设计→实现→测试的顺序依赖"
+  - intent_type: fix
+    primary_topology: solo
+    alternatives: [pipeline]
+    rationale: "修复通常范围小、路径明确，Solo 最高效"
+  - intent_type: refactor
+    primary_topology: pipeline
+    alternatives: [hierarchy]
+    rationale: "重构需要分析→改写→验证的顺序保障"
+  - intent_type: exploration
+    primary_topology: solo
+    alternatives: [swarm]
+    rationale: "小范围用 Solo 快速试错，大范围用 Swarm 并行探索"
+  - intent_type: optimization
+    primary_topology: solo
+    alternatives: [pipeline]
+    rationale: "优化通常范围小（Solo）或需性能基线对比（Pipeline）"
+
+# ── 升级/降级规则 ──
+
+escalation_rules:
+  - from: solo
+    to: pipeline
+    trigger: "任务复杂度超预期，单 Agent 上下文不足"
+  - from: pipeline
+    to: swarm
+    trigger: "需要并行探索替代方案"
+  - from: swarm
+    to: hierarchy
+    trigger: "Worker 数量 > 4 或涉及跨领域协调"
+
+de_escalation_rules:
+  - from: hierarchy
+    to: pipeline
+    trigger: "协调税超过收益（Agent 间通信 > 实际工作）"
+    requires_hip_confirmation: true
+  - from: swarm
+    to: pipeline
+    trigger: "并行任务实际存在强依赖"
+    requires_hip_confirmation: true
+  - from: pipeline
+    to: solo
+    trigger: "多步骤链中仅第一步有实质工作"
+    requires_hip_confirmation: true
+
+# ── 协调税阈值 ──
+
+coordination_tax:
+  max_parallel_agents: 4
+  warning: "超过 4 个并行 Agent 后，准确率增益趋于平坦，协调成本持续上升"
+  source: "Google DeepMind Agent Archetypes 研究"

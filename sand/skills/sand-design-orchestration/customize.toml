@@ -1,0 +1,23 @@
+# sand-design-orchestration 定制化配置
+# 3 层 merge 语义：base → team → user
+# 标量覆盖、表深合并、数组追加
+
+[workflow]
+
+# 激活前步骤
+activation_steps_prepend = []
+
+# 激活后步骤
+activation_steps_append = []
+
+# 持久化事实——5 个 Orchestrate 阶段理论文档
+persistent_facts = [
+  "file:{sand-root}/docs/02-development-cycle/orchestrate/topology-patterns.md",
+  "file:{sand-root}/docs/02-development-cycle/orchestrate/human-intervention.md",
+  "file:{sand-root}/docs/02-development-cycle/orchestrate/context-engineering.md",
+  "file:{sand-root}/docs/02-development-cycle/orchestrate/agent-selection.md",
+  "file:{sand-root}/docs/02-development-cycle/orchestrate/failure-modes.md",
+]
+
+# 完成后钩子
+on_complete = ""

@@ -1,0 +1,20 @@
+# SAND Orchestration Plan Template (Skill 本地副本)
+# Schema: schemas/orchestration-plan.schema.json
+# 由 step-04-plan.md 填充并输出到 .sand/orchestration-plan.yaml
+# 注意：仅包含 Schema 定义的 7 个顶层属性（additionalProperties: false）
+
+plan_id: ""
+intent_id: "INT-YYYYMMDD-001"
+topology: solo
+human_oversight: hip-2
+skill_chain:
+  - skill_name: sand-example-skill  # 占位符——由 step-04 替换为实际 Skill
+    order: 1
+    input_mapping: {}
+    is_external: false
+context_scope:
+  include_files: []
+  exclude_patterns: []
+meta:
+  created_at: null
+  topology_rationale: ""

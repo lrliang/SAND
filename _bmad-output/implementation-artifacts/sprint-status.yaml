@@ -35,7 +35,7 @@ development_status:
   # ── Epic 4: sand-design-orchestration + 执行引擎（Phase 2）──
   epic-4: in-progress
   4-0-orchestrate-theory-foundation: done
-  4-1-sand-design-orchestration-skill: backlog
+  4-1-sand-design-orchestration-skill: done
   4-2-sand-run-execution-engine: backlog
   4-3-plugin-validation-contributor-tools: backlog
 

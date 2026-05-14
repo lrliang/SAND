@@ -1,5 +1,16 @@
 # Deferred Work
 
+## Deferred from: code review of 4-1-sand-design-orchestration-skill (2026-05-14)
+
+- **W1: plan_id 格式无 Schema pattern 约束** — step-04 定义 `OP-YYYYMMDD-{seq}` 但 Schema 仅 `type: string`，与 intent_id 的严格 pattern 不一致。Schema 增强议题。
+- **W2: Skill 本地模板与全局模板重复** — `sand/skills/sand-design-orchestration/templates/orchestration-plan.yaml` 与 `templates/orchestration-plan.yaml` 内容相同，存在维护分叉风险。Architecture 定义要求本地副本。
+- **W3: .sand/orchestration-plan.yaml 为固定路径** — 多次运行会覆盖，无版本化。其他 Skill 使用动态路径（如 `{timestamp}_{team_id}.yaml`）。运行时增强，Story 4-2 范围。
+- **W4: SKILL.md inputs 声明 config.yaml 但按可选处理** — `inputs` 语义应为"必需"但 step 文件容忍缺失。Schema `inputs` 字段语义定义待明确。
+- **W5: 拓扑升级规则仅支持单步** — 无 Solo→Hierarchy 直达路径，需两步升级。Phase 3 扩展。
+- **W6: 决策流程对不可拆分大规模任务的 scale 维度处理** — 决策树仅分支于子任务和不确定性，大规模单任务默认推 Solo 需靠矩阵复核修正。
+- **W7: skill_chain items 未设 additionalProperties:false** — 顶层严格但子对象宽松，Schema 级一致性议题。
+- **W8: Solo 拓扑 skill_chain 默认 skill_name 未定义** — Solo 场景用户不指定时无默认推导逻辑。
+
 ## Deferred from: code review of 4-0-orchestrate-theory-foundation (2026-05-14)
 
 - **W1: Schema vs 扩展模板结构不兼容** — `schemas/orchestration-plan.schema.json` 设置 `additionalProperties: false` 且仅定义 7 个顶层属性，但 `docs/09-templates/orchestration-plan.yaml` 引入 `context_strategy`、`agent_selection`、`failure_mode_plan` 等 Schema 未定义字段。预先存在的设计差异，需在 Phase 2 Schema 演进时统一。
