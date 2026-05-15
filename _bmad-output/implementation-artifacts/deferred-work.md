@@ -1,5 +1,13 @@
 # Deferred Work
 
+## Deferred from: code review of 7-0-operate-theory-foundation (2026-05-15)
+
+- **W1: 替代的传统度量映射与基础理论表不对齐** — signal-collection.md 的 5 个信号各自声明"替代的传统度量"，但映射关系与 non-deterministic-paradigm.md §失效度量分析表的"AI 原生替代信号"列不一致。两者使用不同概念框架（操作信号 vs 战略度量）。需在后续 Story 中明确区分或统一。
+- **W2: flywheel-metrics.md 意图首通率分母文字描述不一致** — 文字描述为"总意图数"但代码公式使用 all_completed_intents。quality-metrics.md 已正确使用"总完成意图数"。预先存在的 flywheel-metrics.md 文字需修正。
+- **W3: 事故标签和部署频率未出现在 metrics/README.md 交叉矩阵** — 矩阵为预先存在工件，新增度量的矩阵位置仅在各度量文档中标注。后续完善矩阵时需补充。
+- **W4: OPS 否决追踪机制未定义** — ops-automation-levels.md 升级条件引用"否决"但未定义发起者、记录方式、存储位置。运行时实现细节。
+- **W5: OPS 降级规则"连续 2 次新问题"中"新问题"无操作化定义** — 触发条件需在运行时实现时明确判定标准。
+
 ## Deferred from: code review of 6-2-sand-run-retrospective-full (2026-05-15)
 
 - **W1: 资产存储路径未具体定义** — step-03 使用"建议路径由团队约定"。设计决策：资产入库建议追加到复盘日志，用户手动创建资产文件。具体资产目录路径留给 Phase 4 或团队约定。

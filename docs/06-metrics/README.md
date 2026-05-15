@@ -4,8 +4,8 @@ SAND 的评价体系从"结果-过程-文化"三个层次展开，并通过层�
 
 ## 目录
 
-- [efficiency-metrics.md](./efficiency-metrics.md) — 效率指标（AI杠杆率、意图吞吐量）
-- [quality-metrics.md](./quality-metrics.md) — 质量指标（首通率、打回率、缺陷逃逸率）
+- [efficiency-metrics.md](./efficiency-metrics.md) — 效率指标（AI杠杆率、意图吞吐量、PR周期时间、AI参与度、部署频率）
+- [quality-metrics.md](./quality-metrics.md) — 质量指标（首通率、打回率、缺陷逃逸率、变更失败率、事故标签）
 - [learning-metrics.md](./learning-metrics.md) — 学习指标（资产复用率、飞轮加速指标）
 - [maturity-metrics.md](./maturity-metrics.md) — 成熟度指标（7维雷达图）
 - [financial-metrics.md](./financial-metrics.md) — 财务指标 `[GAP-4: 待开发]`
