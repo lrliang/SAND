@@ -13,7 +13,7 @@
 
 current_sprint: "Sprint 1 — Phase 1 Core Skills + Infrastructure"
 sprint_goal: "验证 SAND 可执行方法论核心假设：诊断即处方（assess）+ 意图驱动协作（intent）+ 交付验证（validate）"
-last_updated: "2026-05-14"  # Story 5-0 created
+last_updated: "2026-05-15"  # Story 6-0 done
 
 development_status:
   # ── Epic 1: sand-assess-maturity（成熟度评估 + 框架基础设施）──
@@ -45,8 +45,8 @@ development_status:
   5-1-sand-governance-audit-skill: done
 
   # ── Epic 6: sand-run-retrospective（Phase 2-3）──
-  epic-6: backlog
-  6-0-learn-theory-foundation: backlog
+  epic-6: in-progress
+  6-0-learn-theory-foundation: done
   6-1-sand-run-retrospective-basic: backlog
   6-2-sand-run-retrospective-full: backlog
 

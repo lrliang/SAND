@@ -1,5 +1,15 @@
 # Deferred Work
 
+## Deferred from: code review of 6-0-learn-theory-foundation (2026-05-15)
+
+- **W1: source_topic 枚举不完整** — 仅展示 intent_quality 值，其余 4 个议题（orchestration_effectiveness, ai_leverage, failure_mode, assetization_nomination）的映射值未定义。Skill 实现时定义完整枚举。
+- **W2: Phase 2/3 边界条件** — L2b-L2d 的触发机制未明确定义，assetization-process.md 仅说明 Phase 2 执行 L2a。Phase 3 Story 6-2 实现时需定义完整触发链。
+- **W3: learning_signal 字段可选性导致数据饥饿风险** — deviation-tracking.md 定义 learning_signal 为 nullable。Learn 阶段对此字段有强依赖但无强制填充机制。Deferred Work D5 已追踪。
+- **W4: 飞轮指标采集依赖团队主动引用资产** — 资产复用率计算依赖意图声明 context_references 中的 AST-* 引用，但无强制填充机制。MVP 可能报告偏低的复用率。
+- **W5: 重复失败模式检测冷启动** — ai-retrospective.md 议题 4 要求对比"历史复盘中已记录的失败模式"，但首轮 SDC 循环无历史数据。首轮复盘应跳过对比步骤。
+- **W6: 资产过期审查触发流程未定义** — asset-lifecycle.md 定义了过期周期（90-365 天）和审查决策（刷新/归档/延期），但未定义谁触发审查、触发频率、审查 SLA。运行时实现细节。
+- **W7: asset_type 编程值未在总览表展示** — ai-asset-taxonomy.md 总览表仅有 type_code（CTX/INT/ORC/VAL/FAI），未展示对应的 `asset_type` 字段值（context/intent_pattern/orchestration_recipe/validation_rule/failure_case）。Skill 实现时需完整映射。
+
 ## Deferred from: code review of 5-1-sand-governance-audit-skill (2026-05-14)
 
 - **W1: human_confirmations 去重键不含 event_id** — step-02 §5 按 step+timestamp+decision 去重，同毫秒同决策的理论碰撞会丢失确认记录。Schema 无 confirmation_id 字段，需架构级扩展。
