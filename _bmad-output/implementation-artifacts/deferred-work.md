@@ -1,5 +1,12 @@
 # Deferred Work
 
+## Deferred from: code review of 6-1-sand-run-retrospective-basic (2026-05-15)
+
+- **W1: Topic 4 问题顺序微调** — learning_signal 完整度问题和已缓解模式问题的顺序与 ai-retrospective.md 略有交换。内容无遗漏，化妆品级差异。
+- **W2: inputs 使用裸目录路径** — `.sand/intents/` 和 `.sand/executions/` 为裸目录路径，与 sand-governance-audit 的 glob 模式（`.sand/intents/INT-*.yaml`）约定不同。功能无影响。
+- **W3: step 内议题标签编号混淆** — step-01-collect.md 内使用 [Step 1/5] 到 [Step 5/5]，与 SKILL.md 的 [Step 1/1] 形成两级编号。Phase 3 需明确约定。
+- **W4: SKILL.md body 未直接引用 ai-asset-taxonomy.md** — 通过 customize.toml persistent_facts 间接可用，但 SKILL.md body 的理论基础仅列 3 个来源。
+
 ## Deferred from: code review of 6-0-learn-theory-foundation (2026-05-15)
 
 - **W1: source_topic 枚举不完整** — 仅展示 intent_quality 值，其余 4 个议题（orchestration_effectiveness, ai_leverage, failure_mode, assetization_nomination）的映射值未定义。Skill 实现时定义完整枚举。
