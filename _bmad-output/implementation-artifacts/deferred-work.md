@@ -1,5 +1,14 @@
 # Deferred Work
 
+## Deferred from: code review of 6-2-sand-run-retrospective-full (2026-05-15)
+
+- **W1: 资产存储路径未具体定义** — step-03 使用"建议路径由团队约定"。设计决策：资产入库建议追加到复盘日志，用户手动创建资产文件。具体资产目录路径留给 Phase 4 或团队约定。
+- **W2: type_code 映射表未在 step-03 重述** — step-03 依赖 step-02 同 session 上下文传递 type_code 映射。与 sand-governance-audit step 链模式一致。
+- **W3: L2b 评审中置信度调整未操作化** — 评审流程仅支持 accepted/rejected/accepted_with_changes，无独立的置信度调整 UI。workaround: 通过"修改后接受"的 notes 字段传达调整意图。
+- **W4: 关联关系推理规则未详细定义** — step-03 §3 仅说明"AI 推荐可能的关联关系，用户确认或跳过"，无具体推理算法。Phase 4 资产库系统可实现自动关联。
+- **W5: inputs 裸目录路径** — 继承自 Story 6-1 Deferred Work W2（`.sand/intents/` 和 `.sand/executions/`）。
+- **W6: step-03 §4 追加到日志不幂等** — 重复运行 step-03 会在同一复盘日志中产生重复的"资产入库建议"节。MVP 可接受，Phase 4 可增加幂等性检查。
+
 ## Deferred from: code review of 6-1-sand-run-retrospective-basic (2026-05-15)
 
 - **W1: Topic 4 问题顺序微调** — learning_signal 完整度问题和已缓解模式问题的顺序与 ai-retrospective.md 略有交换。内容无遗漏，化妆品级差异。

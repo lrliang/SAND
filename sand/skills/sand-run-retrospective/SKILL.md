@@ -2,8 +2,8 @@
 # === 必填字段（固定顺序）===
 sand_contract: "sandskill.v1"
 name: "sand-run-retrospective"
-version: "0.1.0"
-description: "AI 复盘引导工作流——5 议题结构化回顾 + 结构化日志输出（Phase 2 基础版）"
+version: "0.2.0"
+description: "AI 复盘引导工作流——5 议题结构化回顾 + 资产分类 + 入库建议"
 sdc_phase: "learn"
 entry_point: "SKILL.md"
 requires:
@@ -13,6 +13,7 @@ inputs:
   - ".sand/audits/audit.jsonl"
   - ".sand/intents/"
   - ".sand/executions/"
+  - ".sand/retrospectives/"
 outputs:
   - ".sand/retrospectives/{date}_retro_{seq}.md"
 # === 可选字段（字母序）===
@@ -32,9 +33,7 @@ AI 复盘引导工作流——按 5 个标准议题引导结构化回顾，输�
 
 ## 概述
 
-`sand-run-retrospective` 是 SDC（SAND Development Cycle）Learn 阶段的核心 Skill。它不是传统的"人的表现回顾"，而是**人-AI 协作系统效能的结构化复盘**——将每次 SDC 循环的经验转化为可追踪的学习信号和资产化候选。
-
-**Phase 2 基础版范围：** 5 议题数据收集 + 结构化日志输出。分析报告生成和资产化入库建议在 Phase 3 完整版（Story 6-2）中实现。
+`sand-run-retrospective` 是 SDC（SAND Development Cycle）Learn 阶段的核心 Skill。它不是传统的"人的表现回顾"，而是**人-AI 协作系统效能的结构化复盘**——将每次 SDC 循环的经验转化为可追踪的学习信号，并通过资产分类和入库建议驱动飞轮加速。
 
 **理论基础：**
 
@@ -44,13 +43,11 @@ AI 复盘引导工作流——按 5 个标准议题引导结构化回顾，输�
 
 ## Usage
 
-本 Skill Phase 2 基础版包含 1 个步骤：
+本 Skill 包含 3 个步骤，按顺序执行：
 
-1. **[Step 1/1] 5 议题结构化回顾** (`steps/step-01-collect.md`) — 按 5 个标准议题引导复盘对话，采集数据并输出结构化日志
-
-Phase 3 完整版将追加：
-- Step 2: 5 类 AI 资产分类（`steps/step-02-classify.md`）
-- Step 3: 资产入库建议（`steps/step-03-register.md`）
+1. **[Step 1/3] 5 议题结构化回顾** (`steps/step-01-collect.md`) — 按 5 个标准议题引导复盘对话，采集数据并输出结构化日志
+2. **[Step 2/3] 资产分类与趋势分析** (`steps/step-02-classify.md`) — 基于资产候选按 5 类标准分类，分析飞轮指标趋势
+3. **[Step 3/3] 资产入库建议** (`steps/step-03-register.md`) — 引导 L2b 人工评审 → L2c 结构化 → L2d 入库建议
 
 ## 前置条件
 
@@ -70,4 +67,4 @@ Phase 3 完整版将追加：
 
 ## 输出工件
 
-- `.sand/retrospectives/{YYYYMMDD}_retro_{seq}.md` — 结构化复盘日志（Markdown 格式，含 5 议题数据摘要 + 发现 + 飞轮指标快照）
+- `.sand/retrospectives/{YYYYMMDD}_retro_{seq}.md` — 结构化复盘日志（Markdown 格式，含 5 议题数据摘要 + 发现 + 资产分类 + 入库建议 + 飞轮指标快照）
