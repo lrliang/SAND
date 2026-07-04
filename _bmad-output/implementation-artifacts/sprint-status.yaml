@@ -13,7 +13,7 @@
 
 current_sprint: "Sprint 1 — Phase 1 Core Skills + Infrastructure"
 sprint_goal: "验证 SAND 可执行方法论核心假设：诊断即处方（assess）+ 意图驱动协作（intent）+ 交付验证（validate）"
-last_updated: "2026-05-15"  # 7-0-operate-theory-foundation done
+last_updated: "2026-05-15"  # 7-1-sand-measure-light-skill review
 
 development_status:
   # ── Epic 1: sand-assess-maturity（成熟度评估 + 框架基础设施）──
@@ -53,6 +53,6 @@ development_status:
   # ── Epic 7: Agent 角色 + 度量 + 生态完善（Phase 3）──
   epic-7: in-progress
   7-0-operate-theory-foundation: done
-  7-1-sand-measure-light-skill: backlog
+  7-1-sand-measure-light-skill: review
   7-2-agent-role-skills: backlog
   7-3-skill-auto-discovery-docs: backlog

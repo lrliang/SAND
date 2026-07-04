@@ -1,5 +1,16 @@
 # Deferred Work
 
+## Deferred from: code review of 7-1-sand-measure-light-skill (2026-05-15)
+
+- **W1: git log --merges 包含非 PR 合并** — back-merge、release merge 等维护合并被计入 PR 周期时间。ADR-007 零基础设施约束下无法用纯 Git 区分。未来可通过 GitHub API 模式增强。
+- **W2: Squash merge 产生近零周期时间** — squash merge 的 merge-base 分析返回 squash commit 自身，导致 cycle_hours ≈ 0。代码返回 "partial" 但未专门过滤。
+- **W3: CI API 缺少认证头** — urllib.request 无 Authorization header。真实 CI API 需要 token。设计决策：通用框架 + CSV fallback。Phase 4 可增加 auth 配置。
+- **W4: CI API 无分页** — 单页获取可能截断大数据集。Phase 4 增强。
+- **W5: ||| commit message 分隔符碰撞** — git log --format 使用 ||| 分隔，commit message 中含此字符串时解析错误。建议后续改用 NUL 字节(%x00)。
+- **W6: 未知事故标签默认 non_ai** — 非 ai_related/non_ai/mixed 的标签静默归入 non_ai。可能系统性低估 AI 相关事故。
+- **W7: ../../docs/ 相对路径错误** — SKILL.md 中链接解析为 sand/docs/ 而非仓库根 docs/。与 sand-governance-audit 等全部 Skill 相同的预先存在问题。
+- **W8: 全信号同向时无显式叙事路径** — step-02 §4 设计为"好消息 vs 坏消息"对比，但未定义全部信号同为正向或负向时的叙事策略。
+
 ## Deferred from: code review of 7-0-operate-theory-foundation (2026-05-15)
 
 - **W1: 替代的传统度量映射与基础理论表不对齐** — signal-collection.md 的 5 个信号各自声明"替代的传统度量"，但映射关系与 non-deterministic-paradigm.md §失效度量分析表的"AI 原生替代信号"列不一致。两者使用不同概念框架（操作信号 vs 战略度量）。需在后续 Story 中明确区分或统一。

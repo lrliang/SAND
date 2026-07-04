@@ -1,0 +1,53 @@
+{
+  "metadata": {
+    "collected_at": null,
+    "git_repo": null,
+    "time_window_days": 30,
+    "sand_version": "0.1.0",
+    "collectors": ["git-metrics.py", "ci-metrics.py"]
+  },
+  "signals": {
+    "pr_cycle_time": {
+      "value": null,
+      "unit": "hours",
+      "sample_size": 0,
+      "data_source": "git_log_merges",
+      "status": "unavailable",
+      "raw_data": []
+    },
+    "incident_labels": {
+      "value": {
+        "ai_related": 0,
+        "non_ai": 0,
+        "mixed": 0
+      },
+      "total_incidents": 0,
+      "ai_related_ratio": 0,
+      "data_source": "ci_api_or_csv",
+      "status": "unavailable"
+    },
+    "ai_involvement_rate": {
+      "value": null,
+      "unit": "ratio",
+      "ai_commits": 0,
+      "total_commits": 0,
+      "data_source": "git_log_messages",
+      "status": "unavailable"
+    },
+    "change_failure_rate": {
+      "value": null,
+      "unit": "ratio",
+      "failed_changes": 0,
+      "total_changes": 0,
+      "data_source": "ci_api_or_csv",
+      "status": "unavailable"
+    },
+    "deployment_frequency": {
+      "value": null,
+      "unit": "per_week",
+      "total_deployments": 0,
+      "data_source": "ci_api_or_csv",
+      "status": "unavailable"
+    }
+  }
+}
