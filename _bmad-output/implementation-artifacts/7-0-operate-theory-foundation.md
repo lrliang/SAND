@@ -56,11 +56,11 @@ so that sand-measure-light Skill 的 5 个信号选择有理论依据。
 - [x] [Review][Patch] P2: metrics/README.md 效率指标描述过时 — 更新为含全部 5 个度量名称 [docs/06-metrics/README.md:7] ✅ fixed
 - [x] [Review][Patch] P3: metrics/README.md 质量指标描述过时 — 更新为含全部 5 个度量名称 [docs/06-metrics/README.md:8] ✅ fixed
 - [x] [Review][Patch] P4: Dev Agent 完成记录未确认 quality-metrics.md 行数超标 — 补充确认 [story file completion notes] ✅ fixed
-- [x] [Review][Defer] W1: 替代的传统度量映射与 non-deterministic-paradigm.md 失效度量分析表不对齐 — signal-collection.md 的 5 个信号各自声明替代的传统度量，但映射关系与基础理论文档的替代信号表不一致（如 AI 参与度声明替代 LoC，但基础理论表说 LoC 应被意图声明完成率替代）。两者使用不同概念框架（操作信号 vs 战略度量），但交叉引用容易造成误读
-- [x] [Review][Defer] W2: 意图首通率分母定义在 flywheel-metrics.md 的文字描述中为"总意图数"但公式为 all_completed_intents — quality-metrics.md 正确使用"总完成意图数"和 all_completed_intents，但 flywheel-metrics.md 文字描述有预先存在的不一致
-- [x] [Review][Defer] W3: 事故标签和部署频率未出现在 metrics/README.md 度量-层级交叉矩阵中 — 矩阵为预先存在的工件，新增度量的矩阵位置标注仅在各度量文档中，README 矩阵未更新
-- [x] [Review][Defer] W4: OPS 否决追踪机制未定义 — ops-automation-levels.md 的升级条件引用"否决"但未定义谁发起、如何记录。属于运行时实现细节
-- [x] [Review][Defer] W5: "连续 2 次触发新问题"中"新问题"无操作化定义 — 降级规则的触发条件需要在运行时实现时明确判定标准
+- [x] [Review][Defer→Fixed] W1: 替代的传统度量映射与 non-deterministic-paradigm.md 失效度量分析表不对齐 — signal-collection.md 新增战略层/运营层框架区分 + 交叉引用表 ✅ fixed (2026-07-07)
+- [x] [Review][Defer→Fixed] W2: 意图首通率分母定义在 flywheel-metrics.md 的文字描述中为"总意图数"但公式为 all_completed_intents — 文字改为"总完成意图数" ✅ fixed (2026-07-07)
+- [x] [Review][Defer→Fixed] W3: 事故标签和部署频率未出现在 metrics/README.md 度量-层级交叉矩阵中 — L3 产品列已补充 ✅ fixed (2026-07-07)
+- [x] [Review][Defer→Fixed] W4: OPS 否决追踪机制未定义 — ops-automation-levels.md 新增否决追踪机制章节 ✅ fixed (2026-07-07)
+- [x] [Review][Defer→Fixed] W5: "连续 2 次触发新问题"中"新问题"无操作化定义 — 降级路径表下方新增操作化定义 ✅ fixed (2026-07-07)
 
 ## Dev Notes
 
@@ -199,10 +199,12 @@ N/A — Theory foundation story (documentation), no runtime debugging required.
 - Task 3: 按需完善 efficiency-metrics.md (216 行)。5 个效率度量完整定义：AI 杠杆率（主观评估法）、意图吞吐量（状态机统计）、PR 周期时间（git log 中位数）、AI 参与度（commit 特征检测）、部署频率（DORA 基准）。每个含定义/度量层级/计算方法/数据源/基准值。3 个信号含 sand-measure-light 采集方法交叉引用。略超 100-150 行目标因覆盖 5 个度量（含 STUB 已有的 2 个扩展）。
 - Task 4: 按需完善 quality-metrics.md (231 行)。5 个质量度量完整定义：意图首通率（PRD 成功标准对齐）、审查打回率（趋势解读）、缺陷逃逸率（验证有效性）、变更失败率（DORA 基准）、事故标签（AI/非AI/混合三分类）。每个含定义/度量层级/计算方法/数据源/基准值。变更失败率和事故标签含 sand-measure-light 采集方法交叉引用。含 non-deterministic-paradigm.md 失效度量分析交叉引用。略超 100-150 行目标因覆盖 5 个度量（含 STUB 已有的 3 个扩展 + 2 个新增）。
 - Task 5: 评估并标注 6 个范围外文档。incident-response.md 和 production-validation.md 的 TODO 注释更新为含拉动时机标注（Phase 4）。learning-metrics.md 评估结论：不需要完善，飞轮指标已在 flywheel-metrics.md (Epic 6) 完整定义。其余 3 个保持原状。
+- Review follow-ups W1-W5 (2026-07-07): 修复 5 项 deferred review findings — signal-collection.md 战略/运营层框架区分、flywheel-metrics.md 分母文字一致性、metrics/README.md 矩阵补充、ops-automation-levels.md 否决追踪 + "新问题"操作化定义。
 
 ### Change Log
 
 - 2026-05-15: Story 实现完成。4 个文档从 STUB 升级为完整内容，2 个文档标注拉动时机。全部 5 个 Task / 23 个 Subtask 完成。
+- 2026-07-07: 修复 code review deferred items W1-W5（5 项文档一致性和定义完善）。
 
 ### File List
 
@@ -212,3 +214,7 @@ N/A — Theory foundation story (documentation), no runtime debugging required.
 - docs/06-metrics/quality-metrics.md (MODIFIED — STUB 5 行 → 按需完善 231 行)
 - docs/02-development-cycle/operate/incident-response.md (MODIFIED — TODO 注释更新，标注 Phase 4 拉动时机)
 - docs/02-development-cycle/operate/production-validation.md (MODIFIED — TODO 注释更新，标注 Phase 4 拉动时机)
+- docs/02-development-cycle/learn/flywheel-metrics.md (MODIFIED — 意图首通率分母文字一致性修复)
+- docs/06-metrics/README.md (MODIFIED — 交叉矩阵补充部署频率和事故标签)
+- docs/02-development-cycle/operate/signal-collection.md (MODIFIED — review W1 战略/运营层框架区分)
+- docs/02-development-cycle/operate/ops-automation-levels.md (MODIFIED — review W4/W5 否决追踪和新问题定义)

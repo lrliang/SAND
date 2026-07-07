@@ -13,11 +13,13 @@
 
 ## Deferred from: code review of 7-0-operate-theory-foundation (2026-05-15)
 
-- **W1: 替代的传统度量映射与基础理论表不对齐** — signal-collection.md 的 5 个信号各自声明"替代的传统度量"，但映射关系与 non-deterministic-paradigm.md §失效度量分析表的"AI 原生替代信号"列不一致。两者使用不同概念框架（操作信号 vs 战略度量）。需在后续 Story 中明确区分或统一。
-- **W2: flywheel-metrics.md 意图首通率分母文字描述不一致** — 文字描述为"总意图数"但代码公式使用 all_completed_intents。quality-metrics.md 已正确使用"总完成意图数"。预先存在的 flywheel-metrics.md 文字需修正。
-- **W3: 事故标签和部署频率未出现在 metrics/README.md 交叉矩阵** — 矩阵为预先存在工件，新增度量的矩阵位置仅在各度量文档中标注。后续完善矩阵时需补充。
-- **W4: OPS 否决追踪机制未定义** — ops-automation-levels.md 升级条件引用"否决"但未定义发起者、记录方式、存储位置。运行时实现细节。
-- **W5: OPS 降级规则"连续 2 次新问题"中"新问题"无操作化定义** — 触发条件需在运行时实现时明确判定标准。
+~~以下 5 项已于 2026-07-07 修复完成。~~
+
+- ~~**W1: 替代的传统度量映射与基础理论表不对齐**~~ — ✅ 已修复：`signal-collection.md` 新增"与失效度量分析表的关系"章节，区分战略层与运营层信号框架，并建立交叉引用表；各信号的"替代的传统度量"改为"关联的失效传统度量"并链接战略层替代信号。
+- ~~**W2: flywheel-metrics.md 意图首通率分母文字描述不一致**~~ — ✅ 已修复：定义文字从"总意图数"改为"总完成意图数"，与公式 `all_completed_intents` 一致。
+- ~~**W3: 事故标签和部署频率未出现在 metrics/README.md 交叉矩阵**~~ — ✅ 已修复：L3 产品列补充"部署频率"（效率）和"事故标签"（质量）。
+- ~~**W4: OPS 否决追踪机制未定义**~~ — ✅ 已修复：`ops-automation-levels.md` 新增"否决追踪机制"章节，定义发起者、记录方式（`ops_veto` 审计事件）和存储位置。
+- ~~**W5: OPS 降级规则"连续 2 次新问题"中"新问题"无操作化定义**~~ — ✅ 已修复：降级路径表下方新增"新问题"操作化定义（验证窗口、三类判定标准、排除条件）。
 
 ## Deferred from: code review of 6-2-sand-run-retrospective-full (2026-05-15)
 

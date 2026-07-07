@@ -75,7 +75,7 @@ Phase 4+：向量数据库自动相似度检索。
 
 ### 定义
 
-> **意图首通率**（Intent First-Pass Rate）= Draft → Validated 无回退的意图数 ÷ 总意图数
+> **意图首通率**（Intent First-Pass Rate）= Draft → Validated 无回退的意图数 ÷ 总完成意图数
 
 衡量意图声明的一次性质量——意图从创建到通过验证，中间无 CLEAR 检查失败回退、无验证打回重建。
 
